@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "target": "ES6", 
+        "module": "CommonJS",  
+        "outDir": "./dist" ,
+        "strictNullChecks" : false,
+    },
+    "include": ["src/**/*.ts", 
+                 "cubism/Core/*.ts",
+                 "cubism/Framework/src/**.ts"
+                 ], 
+    "exclude": ["node_modules", "dist"] // 除外するディレクトリ
+}
