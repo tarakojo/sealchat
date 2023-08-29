@@ -2,30 +2,34 @@ import os
 import json
 import base64
 
-assets = dict() 
+assets = list() 
 
 def iter(directory):
-    res = dict() 
+    res = list() 
 
     for key in os.listdir(directory) :
         path = os.path.join(directory, key)
         print(f"{path}")
+        d = dict()
+        res.append(d)
+        
+        d["key"] = key
 
         if os.path.isdir(path) : 
-            res[key] = iter(path)
+            d["data"] = iter(path)
         else : 
             with open(path, mode="rb") as asset : 
                 data = asset.read()
                 data = base64.b64encode(data)
                 data = data.decode('utf-8')
-                res[key] = data   
+                d["data"] = data   
     return res
 
 current = os.path.dirname(os.path.abspath(__file__))
-dir = os.path.join(current, os.pardir)
-dir = os.path.join(dir, os.pardir)
-dir = os.path.join(dir, "assets")
+root_dir = os.path.join(os.path.join(current, os.pardir), os.pardir)
+assets_dir = os.path.join(root_dir, "assets")
+dist_dir = os.path.join(root_dir, "dist")
 
-with open (os.path.join(current, "assets.json"), mode="w") as j : 
-    json.dump(iter(dir), j)
+with open (os.path.join(dist_dir, "assets.json"), mode="w") as j : 
+    json.dump(iter(assets_dir), j)
 

@@ -12,7 +12,7 @@ import { LAppLive2DManager } from './lapplive2dmanager';
 import { LAppPal } from './lapppal';
 import { LAppTextureManager } from './lapptexturemanager';
 import { LAppView } from './lappview';
-import {canvas, gl} from "../main";
+import { canvas, gl } from "../main";
 
 //export let canvas: HTMLCanvasElement = null;
 export let s_instance: LAppDelegate = null;
@@ -116,7 +116,7 @@ export class LAppDelegate {
   public onResize(): void {
     this._resizeCanvas();
     this._view.initialize();
-    this._view.initializeSprite();
+    //this._view.initializeSprite();
 
     // キャンバスサイズを渡す
     const viewport: number[] = [0, 0, canvas.width, canvas.height];
@@ -300,7 +300,7 @@ export class LAppDelegate {
 
     LAppPal.updateTime();
 
-    this._view.initializeSprite();
+    //this._view.initializeSprite();
   }
 
   /**

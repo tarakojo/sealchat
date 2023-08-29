@@ -3,7 +3,7 @@
         "target": "ES6", 
         "module": "CommonJS",  
         "outDir": "./dist" ,
-        "strictNullChecks" : false,
+        "strictNullChecks" : false
     },
     "include": ["src/**/*.ts", 
                  "cubism/Core/*.ts",

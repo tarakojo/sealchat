@@ -16,6 +16,7 @@
     "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
+    "rfc4648": "^1.5.2",
     "whatwg-fetch": "^3.6.17"
   }
 }

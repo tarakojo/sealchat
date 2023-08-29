@@ -120,7 +120,7 @@ export class LAppView {
   /**
    * 画像の初期化を行う。
    */
-  public initializeSprite(): void {
+ /* public initializeSprite(): void {
     const width: number = canvas.width;
     const height: number = canvas.height;
 
@@ -168,7 +168,7 @@ export class LAppView {
     if (this._programId == null) {
       this._programId = LAppDelegate.getInstance().createShader();
     }
-  }
+  }*/
 
   /**
    * タッチされた時に呼ばれる。
@@ -222,9 +222,9 @@ export class LAppView {
       live2DManager.onTap(x, y);
 
       // 歯車にタップしたか
-      if (this._gear.isHit(pointX, pointY)) {
-        live2DManager.nextScene();
-      }
+      //if (this._gear.isHit(pointX, pointY)) {
+      //  live2DManager.nextScene();
+      //}
     }
   }
 
