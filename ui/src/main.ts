@@ -1,4 +1,4 @@
-import { initAssets } from "./assets/assets";
+import { initAssets } from "./assets";
 import { 
     LAppDelegate, 
     onTouchBegan as lappOnTouchBegan, 
@@ -116,7 +116,7 @@ function run () {
 }
 
 window.onload = async () => {
-    await initAssets();
+    await initAssets();    
     initialize();
     run();
 }

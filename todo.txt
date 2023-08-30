@@ -1,0 +1,10 @@
+coreの手動polyfill
+fsでどの関数が使われているか -- readFileSyncのみ？
+pathでどの関数が使われているか -- normalize
+
+live2d open software licenseは改変していいのか
+live2dcubismcoreを改変せず文字列としてソースコードに埋め込んでよいか
+
+frameworkの検証
+
+JSをTSのexpoに組み込む

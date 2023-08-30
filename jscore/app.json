@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "jscore",
+    "slug": "jscore",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}

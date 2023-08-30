@@ -6,7 +6,7 @@
  */
 
 import { csmVector, iterator } from '../../cubism/Framework/src/type/csmvector';
-import { fetchAssetAsPngUrl } from '../assets/assets';
+import { fetchAssetAsPngUrl } from '../assets';
 
 import { gl } from '../main';
 

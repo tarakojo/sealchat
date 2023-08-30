@@ -45,7 +45,7 @@ import { LAppPal } from './lapppal';
 import { TextureInfo } from './lapptexturemanager';
 import { LAppWavFileHandler } from './lappwavfilehandler';
 import { CubismMoc } from '../../cubism/Framework/src/model/cubismmoc';
-import { fetchAssetAsync } from '../assets/assets';
+import { fetchAssetAsync } from '../assets';
 
 enum LoadStep {
   LoadAssets,
