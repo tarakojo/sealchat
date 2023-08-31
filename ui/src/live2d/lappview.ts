@@ -5,12 +5,11 @@
  * that can be found at https://www.live2d.com/eula/live2d-open-software-license-agreement_en.html.
  */
 
-import { CubismMatrix44 } from '../../cubism/Framework/src/math/cubismmatrix44';
-import { CubismViewMatrix } from '../../cubism/Framework/src/math/cubismviewmatrix';
+import { CubismMatrix44 } from './framework/math/cubismmatrix44';
+import { CubismViewMatrix } from './framework/math/cubismviewmatrix';
 
 import * as LAppDefine from './lappdefine';
-import {  LAppDelegate } from './lappdelegate';
-import {canvas, gl }from '../main';
+import { canvas, gl, LAppDelegate } from './lappdelegate';
 import { LAppLive2DManager } from './lapplive2dmanager';
 import { LAppPal } from './lapppal';
 import { LAppSprite } from './lappsprite';
@@ -108,7 +107,7 @@ export class LAppView {
       this._gear.render(this._programId);
     }
 
-  //  gl.flush();
+    gl.flush();
 
     const live2DManager: LAppLive2DManager = LAppLive2DManager.getInstance();
 
@@ -120,7 +119,7 @@ export class LAppView {
   /**
    * 画像の初期化を行う。
    */
- /* public initializeSprite(): void {
+  public initializeSprite(): void {
     const width: number = canvas.width;
     const height: number = canvas.height;
 
@@ -168,7 +167,7 @@ export class LAppView {
     if (this._programId == null) {
       this._programId = LAppDelegate.getInstance().createShader();
     }
-  }*/
+  }
 
   /**
    * タッチされた時に呼ばれる。

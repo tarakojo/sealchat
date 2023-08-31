@@ -1,5 +1,11 @@
-<html>
-    <body>
-    <img src="./dog.jpg" width="200" height="200" />
-    </body> 
-</html>
+<div id = "redbox" style="height:100px; width:100px; background-color:red"></div>
+<script>
+    fetch("../aza.jpg").then((r) => {
+        r.blob().then((blob) => {
+            const x = document.getElementById("redbox")
+            const img = document.createElement('img');
+            img.src = URL.createObjectURL(blob);
+            x.appendChild(img);
+        });
+    });
+</script>

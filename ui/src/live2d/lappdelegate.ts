@@ -5,19 +5,18 @@
  * that can be found at https://www.live2d.com/eula/live2d-open-software-license-agreement_en.html.
  */
 
-import { CubismFramework, Option } from '../../cubism/Framework/src/live2dcubismframework';
+import { CubismFramework, Option } from './framework/live2dcubismframework';
 
 import * as LAppDefine from './lappdefine';
 import { LAppLive2DManager } from './lapplive2dmanager';
 import { LAppPal } from './lapppal';
 import { LAppTextureManager } from './lapptexturemanager';
 import { LAppView } from './lappview';
-import { canvas, gl } from "../main";
 
-//export let canvas: HTMLCanvasElement = null;
+export let canvas: HTMLCanvasElement = null;
 export let s_instance: LAppDelegate = null;
-//export let gl: WebGLRenderingContext = null;
-//export let frameBuffer: WebGLFramebuffer = null;
+export let gl: WebGLRenderingContext = null;
+export let frameBuffer: WebGLFramebuffer = null;
 
 /**
  * アプリケーションクラス。
@@ -49,21 +48,23 @@ export class LAppDelegate {
     s_instance = null;
   }
 
+  /**
+   * APPに必要な物を初期化する。
+   */
   public initialize(): boolean {
     // キャンバスの作成
-  //  canvas = document.createElement('canvas');
-   // if (LAppDefine.CanvasSize === 'auto') {
+    canvas = document.createElement('canvas');
+    if (LAppDefine.CanvasSize === 'auto') {
       this._resizeCanvas();
-   // } else {
-   //   canvas.width = LAppDefine.CanvasSize.width;
-   //   canvas.height = LAppDefine.CanvasSize.height;
-   // }
+    } else {
+      canvas.width = LAppDefine.CanvasSize.width;
+      canvas.height = LAppDefine.CanvasSize.height;
+    }
 
     // glコンテキストを初期化
     // @ts-ignore
-    //gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
 
-    /*
     if (!gl) {
       alert('Cannot initialize WebGL. This browser does not support.');
       gl = null;
@@ -74,10 +75,10 @@ export class LAppDelegate {
       // gl初期化失敗
       return false;
     }
-    */
+
     // キャンバスを DOM に追加
-    //document.body.appendChild(canvas);
-/*
+    document.body.appendChild(canvas);
+
     if (!frameBuffer) {
       frameBuffer = gl.getParameter(gl.FRAMEBUFFER_BINDING);
     }
@@ -100,7 +101,7 @@ export class LAppDelegate {
       canvas.onmousemove = onMouseMoved;
       canvas.onmouseup = onClickEnded;
     }
-*/
+
     // AppViewの初期化
     this._view.initialize();
 
@@ -116,7 +117,7 @@ export class LAppDelegate {
   public onResize(): void {
     this._resizeCanvas();
     this._view.initialize();
-    //this._view.initializeSprite();
+   // this._view.initializeSprite();
 
     // キャンバスサイズを渡す
     const viewport: number[] = [0, 0, canvas.width, canvas.height];
@@ -144,7 +145,7 @@ export class LAppDelegate {
   /**
    * 実行処理。
    */
- /* public run(): void {
+  public run(): void {
     // メインループ
     const loop = (): void => {
       // インスタンスの有無の確認
@@ -180,20 +181,6 @@ export class LAppDelegate {
       requestAnimationFrame(loop);
     };
     loop();
-  } */
-
-  public render () {
-    
-      // 時間更新
-    LAppPal.updateTime();
-  
-    // 透過設定
-    gl.enable(gl.BLEND);
-    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-  
-    // 描画更新
-    this._view.render();
-
   }
 
   /**
@@ -323,7 +310,7 @@ export class LAppDelegate {
 /**
  * クリックしたときに呼ばれる。
  */
-export function onClickBegan(e: MouseEvent): void {
+function onClickBegan(e: MouseEvent): void {
   if (!LAppDelegate.getInstance()._view) {
     LAppPal.printMessage('view notfound');
     return;
@@ -339,7 +326,7 @@ export function onClickBegan(e: MouseEvent): void {
 /**
  * マウスポインタが動いたら呼ばれる。
  */
-export function onMouseMoved(e: MouseEvent): void {
+function onMouseMoved(e: MouseEvent): void {
   if (!LAppDelegate.getInstance()._captured) {
     return;
   }
@@ -359,7 +346,7 @@ export function onMouseMoved(e: MouseEvent): void {
 /**
  * クリックが終了したら呼ばれる。
  */
-export function onClickEnded(e: MouseEvent): void {
+function onClickEnded(e: MouseEvent): void {
   LAppDelegate.getInstance()._captured = false;
   if (!LAppDelegate.getInstance()._view) {
     LAppPal.printMessage('view notfound');
@@ -376,7 +363,7 @@ export function onClickEnded(e: MouseEvent): void {
 /**
  * タッチしたときに呼ばれる。
  */
-export function onTouchBegan(e: TouchEvent): void {
+function onTouchBegan(e: TouchEvent): void {
   if (!LAppDelegate.getInstance()._view) {
     LAppPal.printMessage('view notfound');
     return;
@@ -393,7 +380,7 @@ export function onTouchBegan(e: TouchEvent): void {
 /**
  * スワイプすると呼ばれる。
  */
-export function onTouchMoved(e: TouchEvent): void {
+function onTouchMoved(e: TouchEvent): void {
   if (!LAppDelegate.getInstance()._captured) {
     return;
   }
@@ -414,7 +401,7 @@ export function onTouchMoved(e: TouchEvent): void {
 /**
  * タッチが終了したら呼ばれる。
  */
-export function onTouchEnded(e: TouchEvent): void {
+function onTouchEnded(e: TouchEvent): void {
   LAppDelegate.getInstance()._captured = false;
 
   if (!LAppDelegate.getInstance()._view) {
@@ -433,7 +420,7 @@ export function onTouchEnded(e: TouchEvent): void {
 /**
  * タッチがキャンセルされると呼ばれる。
  */
-export function onTouchCancel(e: TouchEvent): void {
+function onTouchCancel(e: TouchEvent): void {
   LAppDelegate.getInstance()._captured = false;
 
   if (!LAppDelegate.getInstance()._view) {

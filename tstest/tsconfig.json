@@ -1,8 +1,0 @@
-{
-    "compilerOptions": {
-      "allowJs": true,
-      "strictNullChecks": false
-    },
-    "include": ["**/*.js", "**/*.ts"]
-  }
-  

@@ -7,45 +7,44 @@
 
 import 'whatwg-fetch';
 
-import { CubismDefaultParameterId } from '../../cubism/Framework/src/cubismdefaultparameterid';
-import { CubismModelSettingJson } from '../../cubism/Framework/src/cubismmodelsettingjson';
+import { CubismDefaultParameterId } from './framework/cubismdefaultparameterid';
+import { CubismModelSettingJson } from './framework/cubismmodelsettingjson';
 import {
   BreathParameterData,
   CubismBreath
-} from '../../cubism/Framework/src/effect/cubismbreath';
-import { CubismEyeBlink } from '../../cubism/Framework/src/effect/cubismeyeblink';
-import { ICubismModelSetting } from '../../cubism/Framework/src/icubismmodelsetting';
-import { CubismIdHandle } from '../../cubism/Framework/src/id/cubismid';
-import { CubismFramework } from '../../cubism/Framework/src/live2dcubismframework';
-import { CubismMatrix44 } from '../../cubism/Framework/src/math/cubismmatrix44';
-import { CubismUserModel } from '../../cubism/Framework/src/model/cubismusermodel';
+} from './framework/effect/cubismbreath';
+import { CubismEyeBlink } from './framework/effect/cubismeyeblink';
+import { ICubismModelSetting } from './framework/icubismmodelsetting';
+import { CubismIdHandle } from './framework/id/cubismid';
+import { CubismFramework } from './framework/live2dcubismframework';
+import { CubismMatrix44 } from './framework/math/cubismmatrix44';
+import { CubismUserModel } from './framework/model/cubismusermodel';
 import {
   ACubismMotion,
   FinishedMotionCallback
-} from '../../cubism/Framework/src/motion/acubismmotion';
-import { CubismMotion } from '../../cubism/Framework/src/motion/cubismmotion';
+} from './framework/motion/acubismmotion';
+import { CubismMotion } from './framework/motion/cubismmotion';
 import {
   CubismMotionQueueEntryHandle,
   InvalidMotionQueueEntryHandleValue
-} from '../../cubism/Framework/src/motion/cubismmotionqueuemanager';
-import { csmMap } from '../../cubism/Framework/src/type/csmmap';
-import { csmRect } from '../../cubism/Framework/src/type/csmrectf';
-import { csmString } from '../../cubism/Framework/src/type/csmstring';
-import { csmVector } from '../../cubism/Framework/src/type/csmvector';
+} from './framework/motion/cubismmotionqueuemanager';
+import { csmMap } from './framework/type/csmmap';
+import { csmRect } from './framework/type/csmrectf';
+import { csmString } from './framework/type/csmstring';
+import { csmVector } from './framework/type/csmvector';
 import {
   CSM_ASSERT,
   CubismLogError,
   CubismLogInfo
-} from '../../cubism/Framework/src/utils/cubismdebug';
+} from './framework/utils/cubismdebug';
 
 import * as LAppDefine from './lappdefine';
-import {  LAppDelegate } from './lappdelegate';
-import {canvas, frameBuffer, gl } from "../main";
+import { canvas, frameBuffer, gl, LAppDelegate } from './lappdelegate';
 import { LAppPal } from './lapppal';
 import { TextureInfo } from './lapptexturemanager';
 import { LAppWavFileHandler } from './lappwavfilehandler';
-import { CubismMoc } from '../../cubism/Framework/src/model/cubismmoc';
-import { fetchAssetAsync } from '../assets';
+import { CubismMoc } from './framework/model/cubismmoc';
+import { getAssetAsync } from '../assets/assets';
 
 enum LoadStep {
   LoadAssets,
@@ -86,9 +85,9 @@ export class LAppModel extends CubismUserModel {
   public loadAssets(dir: string, fileName: string): void {
     this._modelHomeDir = dir;
 
-    //fetch(`${this._modelHomeDir}${fileName}`)
-    fetchAssetAsync(`${this._modelHomeDir}${fileName}`)
-    //.then(response => response.arrayBuffer())
+   // fetch(`${this._modelHomeDir}${fileName}`)
+   getAssetAsync(`${this._modelHomeDir}${fileName}`)
+    //  .then(response => response.arrayBuffer())
       .then(arrayBuffer => {
         const setting: ICubismModelSetting = new CubismModelSettingJson(
           arrayBuffer,
@@ -119,8 +118,8 @@ export class LAppModel extends CubismUserModel {
     if (this._modelSetting.getModelFileName() != '') {
       const modelFileName = this._modelSetting.getModelFileName();
 
-     // fetch(`${this._modelHomeDir}${modelFileName}`)
-      fetchAssetAsync(`${this._modelHomeDir}${modelFileName}`)
+      //fetch(`${this._modelHomeDir}${modelFileName}`)
+      getAssetAsync(`${this._modelHomeDir}${modelFileName}`)
        // .then(response => response.arrayBuffer())
         .then(arrayBuffer => {
           this.loadModel(arrayBuffer, this._mocConsistency);
@@ -145,8 +144,8 @@ export class LAppModel extends CubismUserModel {
           const expressionFileName =
             this._modelSetting.getExpressionFileName(i);
 
-          //fetch(`${this._modelHomeDir}${expressionFileName}`)
-          fetchAssetAsync(`${this._modelHomeDir}${expressionFileName}`)
+         // fetch(`${this._modelHomeDir}${expressionFileName}`)
+          getAssetAsync(`${this._modelHomeDir}${expressionFileName}`)
           //  .then(response => response.arrayBuffer())
             .then(arrayBuffer => {
               const motion: ACubismMotion = this.loadExpression(
@@ -188,9 +187,9 @@ export class LAppModel extends CubismUserModel {
       if (this._modelSetting.getPhysicsFileName() != '') {
         const physicsFileName = this._modelSetting.getPhysicsFileName();
 
-        //fetch(`${this._modelHomeDir}${physicsFileName}`)
-        fetchAssetAsync(`${this._modelHomeDir}${physicsFileName}`)
-        //  .then(response => response.arrayBuffer())
+       // fetch(`${this._modelHomeDir}${physicsFileName}`)
+        getAssetAsync(`${this._modelHomeDir}${physicsFileName}`)
+         // .then(response => response.arrayBuffer())
           .then(arrayBuffer => {
             this.loadPhysics(arrayBuffer, arrayBuffer.byteLength);
 
@@ -213,8 +212,8 @@ export class LAppModel extends CubismUserModel {
       if (this._modelSetting.getPoseFileName() != '') {
         const poseFileName = this._modelSetting.getPoseFileName();
 
-        //fetch(`${this._modelHomeDir}${poseFileName}`)
-        fetchAssetAsync(`${this._modelHomeDir}${poseFileName}`)
+      //  fetch(`${this._modelHomeDir}${poseFileName}`)
+        getAssetAsync(`${this._modelHomeDir}${poseFileName}`)
         //  .then(response => response.arrayBuffer())
           .then(arrayBuffer => {
             this.loadPose(arrayBuffer, arrayBuffer.byteLength);
@@ -285,8 +284,8 @@ export class LAppModel extends CubismUserModel {
       if (this._modelSetting.getUserDataFile() != '') {
         const userDataFile = this._modelSetting.getUserDataFile();
 
-        //fetch(`${this._modelHomeDir}${userDataFile}`)
-        fetchAssetAsync(`${this._modelHomeDir}${userDataFile}`)
+       // fetch(`${this._modelHomeDir}${userDataFile}`)
+        getAssetAsync(`${this._modelHomeDir}${userDataFile}`)
         //  .then(response => response.arrayBuffer())
           .then(arrayBuffer => {
             this.loadUserData(arrayBuffer, arrayBuffer.byteLength);
@@ -433,7 +432,7 @@ export class LAppModel extends CubismUserModel {
         // 読み込み
         LAppDelegate.getInstance()
           .getTextureManager()
-          .createTextureFromAsset(texturePath, usePremultiply, onLoad);
+          .createTextureFromPngFile(texturePath, usePremultiply, onLoad);
         this.getRenderer().setIsPremultipliedAlpha(usePremultiply);
       }
 
@@ -576,8 +575,8 @@ export class LAppModel extends CubismUserModel {
 
     if (motion == null) {
       //fetch(`${this._modelHomeDir}${motionFileName}`)
-      fetchAssetAsync(`${this._modelHomeDir}${motionFileName}`)
-      //  .then(response => response.arrayBuffer())
+      getAssetAsync(`${this._modelHomeDir}${motionFileName}`)
+     //   .then(response => response.arrayBuffer())
         .then(arrayBuffer => {
           motion = this.loadMotion(
             arrayBuffer,
@@ -743,7 +742,7 @@ export class LAppModel extends CubismUserModel {
       }
 
       //fetch(`${this._modelHomeDir}${motionFileName}`)
-      fetchAssetAsync(`${this._modelHomeDir}${motionFileName}`)
+      getAssetAsync(`${this._modelHomeDir}${motionFileName}`)
       //  .then(response => response.arrayBuffer())
         .then(arrayBuffer => {
           const tmpMotion: CubismMotion = this.loadMotion(
@@ -839,9 +838,9 @@ export class LAppModel extends CubismUserModel {
     if (this._modelSetting.getModelFileName() != '') {
       const modelFileName = this._modelSetting.getModelFileName();
 
-      //const response = await fetch(`${this._modelHomeDir}${modelFileName}`);
-      //const arrayBuffer = await response.arrayBuffer();
-      const arrayBuffer = await fetchAssetAsync(`${this._modelHomeDir}${modelFileName}`);
+     // const response = await fetch(`${this._modelHomeDir}${modelFileName}`);
+     // const arrayBuffer = await response.arrayBuffer();
+     const arrayBuffer = await getAssetAsync(`${this._modelHomeDir}${modelFileName}`);
 
       this._consistency = CubismMoc.hasMocConsistency(arrayBuffer);
 

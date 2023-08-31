@@ -1,14 +1,23 @@
 {
-    "compilerOptions": {
-        "target": "ES6", 
-        "module": "CommonJS",  
-        "outDir": "./dist" ,
-        "strictNullChecks" : false,
-        "resolveJsonModule": true
-    },
-    "include": ["src/**/*.ts", 
-                 "cubism/Core/*.ts",
-                 "cubism/Framework/src/**.ts"
-                 ], 
-    "exclude": ["node_modules", "dist"] // 除外するディレクトリ
+  "compilerOptions": {
+    "target": "es5",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "removeComments": true,
+    "sourceMap": true,
+    "baseUrl": "./",
+    "noImplicitAny": true,
+    "useUnknownInCatchVariables": true
+  },
+  "include": [
+    "src/**/*.ts",
+    "CubismSdkForWeb-4-r.7/Core/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

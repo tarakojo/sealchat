@@ -1,25 +1,29 @@
-const path = require('path');
+
+var path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlInlineScriptPlugin = require('html-inline-script-webpack-plugin');
 
 module.exports = {
-  entry: './src/main.ts', // プロジェクトのエントリーファイルを指定
+  mode: 'production',
+  target: ['web', 'es5'],
+  entry: ['./src/main.ts'],
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+    publicPath: '/dist/'
+  },
+  resolve: {
+    extensions: ['.ts', '.js'],
+  },
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        loader: 'ts-loader'
       }
     ]
   },
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js']
-  },
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
-  }, 
   plugins: [
     new HtmlInlineScriptPlugin(),
     new HtmlWebpackPlugin({
@@ -28,4 +32,4 @@ module.exports = {
       minify: false,
     }),
   ]
-};
+}

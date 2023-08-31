@@ -21,7 +21,7 @@ export class LAppPal {
    *      size        ファイルサイズ
    * }
    */
-  /*public static loadFileAsBytes(
+/*  public static loadFileAsBytes(
     filePath: string,
     callback: (arrayBuffer: ArrayBuffer, size: number) => void
   ): void {
