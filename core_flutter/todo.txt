@@ -1,8 +1,0 @@
-inapwebviewを作成
-テストhtmlを表示
-ビルドしてローカルファイルを読めるか
-androidに向けてbuild
-androidシミュレーター用意
-androidの場合ローカルサーバを立ち上げる感じにする
-ローカルファイルにアクセスできるか検証
-webviewブリッジ検証
