@@ -5,7 +5,6 @@
  * that can be found at https://www.live2d.com/eula/live2d-open-software-license-agreement_en.html.
  */
 
-import { getAssetAsPngURL } from '../assets/assets';
 import { csmVector, iterator } from './framework/type/csmvector';
 
 import { gl } from './lappdelegate';
@@ -63,7 +62,7 @@ export class LAppTextureManager {
         // 詳細：https://stackoverflow.com/a/5024181
         ite.ptr().img = new Image();
         ite.ptr().img.onload = (): void => callback(ite.ptr());
-        ite.ptr().img.src = getAssetAsPngURL(fileName);
+        ite.ptr().img.src = fileName;
         return;
       }
     }
@@ -112,7 +111,7 @@ export class LAppTextureManager {
 
       callback(textureInfo);
     };
-    img.src = getAssetAsPngURL(fileName);
+    img.src = fileName;
   }
 
   /**

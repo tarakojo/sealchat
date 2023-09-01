@@ -14,7 +14,7 @@
   },
   "include": [
     "src/**/*.ts",
-    "CubismSdkForWeb-4-r.7/Core/*.ts"
+    "CubismSdkForWeb/Core/*.ts"
   ],
   "exclude": [
     "node_modules",

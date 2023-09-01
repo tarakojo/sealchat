@@ -1,7 +1,5 @@
-
+const CopyPlugin = require("copy-webpack-plugin");
 var path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const HtmlInlineScriptPlugin = require('html-inline-script-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -25,11 +23,12 @@ module.exports = {
     ]
   },
   plugins: [
-    new HtmlInlineScriptPlugin(),
-    new HtmlWebpackPlugin({
-      inlineSource: '.(js|css)$',
-      template: "./src/index.html",
-      minify: false,
-    }),
+    new CopyPlugin({
+      patterns : [
+        {from:"./CubismSdkForWeb/Core/live2dcubismcore.min.js", to : "./live2dcubismcore.min.js"},
+        {from:"./src/index.html", to : "./index.html"},
+        {from:"./assets", to : "./assets"}
+      ]
+    })
   ]
 }

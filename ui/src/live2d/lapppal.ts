@@ -21,14 +21,14 @@ export class LAppPal {
    *      size        ファイルサイズ
    * }
    */
-/*  public static loadFileAsBytes(
+  public static loadFileAsBytes(
     filePath: string,
     callback: (arrayBuffer: ArrayBuffer, size: number) => void
   ): void {
     fetch(filePath)
       .then(response => response.arrayBuffer())
       .then(arrayBuffer => callback(arrayBuffer, arrayBuffer.byteLength));
-  }*/
+  }
 
   /**
    * デルタ時間（前回フレームとの差分）を取得する

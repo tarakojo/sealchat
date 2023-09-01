@@ -8,21 +8,18 @@
 import { LAppDelegate } from './live2d/lappdelegate';
 import * as LAppDefine from './live2d/lappdefine';
 
-(window as any)["runSealView"] = () => {
+window.onload = () => {
   // create the application instance
   if (LAppDelegate.getInstance().initialize() == false) {
     return;
   }
       
-  window.onbeforeunload = (): void => LAppDelegate.releaseInstance();
-  window.onresize = () => {
-    if (LAppDefine.CanvasSize === 'auto') {
-      LAppDelegate.getInstance().onResize();
-    }
-  };
-
   LAppDelegate.getInstance().run();
 };
 
-(window as any)["waitingAssets"] = true;
-
+window.onbeforeunload = (): void => LAppDelegate.releaseInstance();
+window.onresize = () => {
+  if (LAppDefine.CanvasSize === 'auto') {
+    LAppDelegate.getInstance().onResize();
+  }
+};
