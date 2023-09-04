@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-sealchat-dev-160432-authRole",
+      "UnauthRoleArn": "arn:aws:iam::397263761408:role/amplify-sealchat-dev-160432-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::397263761408:role/amplify-sealchat-dev-160432-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-sealchat-dev-160432-deployment",
+      "UnauthRoleName": "amplify-sealchat-dev-160432-unauthRole",
+      "StackName": "amplify-sealchat-dev-160432",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:397263761408:stack/amplify-sealchat-dev-160432/4d2024b0-4af1-11ee-b38e-06f4410b724d",
+      "AmplifyAppId": "d28zjyzijeahl7"
+    }
+  }
+}

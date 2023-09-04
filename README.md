@@ -1,4 +1,4 @@
-# core
+# sealchat
 
 A new Flutter project.
 

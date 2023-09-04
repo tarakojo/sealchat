@@ -1,4 +1,4 @@
-package com.example.core
+package com.example.sealchat
 
 import io.flutter.embedding.android.FlutterActivity
 

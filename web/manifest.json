@@ -1,6 +1,6 @@
 {
-    "name": "core",
-    "short_name": "core",
+    "name": "sealchat",
+    "short_name": "sealchat",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
