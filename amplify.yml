@@ -22,6 +22,8 @@ frontend:
               echo "flutter sdk was cloned"
             fi
 
+            echo "preBuild was finished"
+
     build:
       commands:
         - |
