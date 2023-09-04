@@ -9,7 +9,7 @@ frontend:
     build:
       commands:
         - |
-            flutter doctor
+            _amplify_flutter_root/bin/flutter doctor
             _amplify_flutter_root/bin/flutter build web
   artifacts:
     baseDirectory: build/web
