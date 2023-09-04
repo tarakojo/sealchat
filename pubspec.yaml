@@ -36,8 +36,6 @@ dependencies:
   url_launcher: ^6.1.14
   flutter_chat_ui: ^1.6.9
   logger: ^2.0.1
-  dart_openai: ^4.0.0
-  flutter_dotenv: ^5.1.0
   
   amplify_api: ^1.0.0
   amplify_auth_cognito: ^1.0.0
@@ -101,7 +99,6 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 
   assets : 
-    - .env
     - assets/sealview/
     - assets/sealview/assets/hgkoazarasi/
     - assets/sealview/assets/hgkoazarasi/expressions/

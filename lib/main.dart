@@ -1,20 +1,10 @@
 import 'dart:async';
-import 'package:dart_openai/dart_openai.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:sealchat/chat/chattest.dart';
-import 'package:sealchat/env.dart';
 import 'package:sealchat/ui/testchat.dart';
 import './ui/sealview.dart';
 
 Future main() async {
-  //.envファイルの読み込み
-  await initEnv();
-  //openaiのapiキー設定
-  OpenAI.apiKey = dotenv.get('OPENAI_API_KEY');
-
-  //await initChatGPT();
-
+ 
   await initSealView();
   runApp(MaterialApp(home: new MyApp()));
 }
