@@ -3,27 +3,9 @@ frontend:
   phases:
     preBuild:
       commands:
-        - |    
-            # flutter sdkのブランチ
-            FLUTTER_SDK_BRUNCH="3.3"
-
-            if [ -d "_amplify_flutter_root" ]; then
-              # flutter sdkのブランチが異なる場合は削除する
-              if [ ! -d "_amplify_flutter_root/flutter_sdk_brunch" ] || [ "$(cat _amplify_flutter_root/flutter_sdk_brunch)" != "$FLUTTER_SDK_BRUNCH" ]; then
-                rm -rf "_amplify_flutter_root"
-                echo "chache was deleted"
-              fi
-            fi 
-
-            if [ ! -d "_amplify_flutter_root" ]; then
-              git clone https://github.com/flutter/flutter.git --depth 1 -b "$FLUTTER_SDK_BRUNCH" _amplify_flutter_root
-
-              echo "$FLUTTER_SDK_BRUNCH" > _amplify_flutter_root/flutter_sdk_brunch
-              echo "flutter sdk was cloned"
-            fi
-
-            echo "preBuild was finished"
-
+        - |
+            rm -rf _amplify_flutter_root
+            git clone https://github.com/flutter/flutter.git --depth 1 -b 3.10.5 _amplify_flutter_root
     build:
       commands:
         - |
