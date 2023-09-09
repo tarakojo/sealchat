@@ -1,10 +1,11 @@
-
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+import 'package:amplify_flutter/amplify_flutter.dart';
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 
 String randomString() {
   final random = Random.secure();
@@ -38,7 +39,16 @@ class ChatRoomState extends State<ChatRoom> {
     });
   }
 
-  void _handleSendPressed(types.PartialText message) {
+  void _handleSendPressed(types.PartialText message) async {
+    Future<bool> isUserSignedIn() async {
+      final result = await Amplify.Auth.fetchAuthSession();
+       final user = await Amplify.Auth.getCurrentUser();
+      print(user);
+      return result.isSignedIn;
+    }
+
+    print(await isUserSignedIn());
+
     final textMessage = types.TextMessage(
       author: _user,
       createdAt: DateTime.now().millisecondsSinceEpoch,
