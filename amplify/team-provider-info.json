@@ -10,6 +10,11 @@
       "StackName": "amplify-sealchat-dev-162750",
       "StackId": "arn:aws:cloudformation:ap-northeast-1:397263761408:stack/amplify-sealchat-dev-162750/8e6a4970-4af4-11ee-8951-0617954eff63",
       "AmplifyAppId": "d1epdvh12x3042"
+    },
+    "categories": {
+      "auth": {
+        "sealchatf67e382b": {}
+      }
     }
   }
 }
