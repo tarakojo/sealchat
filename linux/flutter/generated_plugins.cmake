@@ -3,7 +3,8 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  amplify_db_common
+  desktop_webview_auth
+  flutter_secure_storage_linux
   url_launcher_linux
 )
 

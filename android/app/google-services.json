@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "26446727063",
+    "project_id": "sealchat",
+    "storage_bucket": "sealchat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:26446727063:android:dc1c33c4a09a91213ea6d2",
+        "android_client_info": {
+          "package_name": "com.example.sealchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "26446727063-khr9jlda74jjssffdo22g2574f2mmm93.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-RUj2E2ue-LftT7ul-i79dhQiJhpfwNc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "26446727063-khr9jlda74jjssffdo22g2574f2mmm93.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
