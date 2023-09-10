@@ -1,4 +1,4 @@
-/*import 'dart:io';
+import 'dart:io';
 
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'dart:async';
@@ -7,13 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:sealchat/logger.dart';
 
 Future initSealView() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
   if (!kIsWeb && defaultTargetPlatform == TargetPlatform.android) {
     await InAppWebViewController.setWebContentsDebuggingEnabled(true);
   }
-
-
 }
 
 class SealView extends StatefulWidget {
@@ -35,7 +31,7 @@ class _SealViewState extends State<SealView> {
 
     final WebUri url;
     if(kIsWeb){
-      url = WebUri("./assets/sealview/index.html");
+      url = WebUri("./assets/assets/sealview/index.html");
     }
     else if (Platform.isAndroid){
       url = WebUri(
@@ -60,4 +56,3 @@ class _SealViewState extends State<SealView> {
     );
   }
 }
-*/

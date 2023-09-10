@@ -27,7 +27,7 @@ module.exports = {
       patterns : [
         {from:"./CubismSdkForWeb/Core/live2dcubismcore.min.js", to : "./live2dcubismcore.min.js"},
         {from:"./src/index.html", to : "./index.html"},
-        {from:"./assets", to : "./assets"}
+        {from:"./assets", to : "./assets"},
       ]
     })
   ]
