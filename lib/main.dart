@@ -1,22 +1,25 @@
 import 'dart:async';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:sealchat/ui/testchat.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
-import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
+//import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import './firebase_options.dart';
-import './ui/sealview.dart';
+import 'package:flutter/services.dart' ;
 
-Future main() async {  
+Future main() async {
+  print("!!");
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  
+ 
+/*
   FirebaseUIAuth.configureProviders([
-    GoogleProvider(clientId: "26446727063-khr9jlda74jjssffdo22g2574f2mmm93.apps.googleusercontent.com"),
-  ]);
-  //await initSealView();
+    GoogleProvider(
+        clientId:
+            "26446727063-khr9jlda74jjssffdo22g2574f2mmm93.apps.googleusercontent.com"),
+  ]);*/
+
   runApp(MyApp());
 }
 
@@ -34,11 +37,14 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        initialRoute:
-            FirebaseAuth.instance.currentUser == null ? '/sign-in' : '/profile',
+        initialRoute:'/sign-in',
+          //  FirebaseAuth.instance.currentUser == null ? '/sign-in' : '/profile',
         routes: {
           '/sign-in': (context) {
-            return SignInScreen(
+            return Container(
+              child: Text("aaaaa"),
+            );
+            /* SignInScreen(
               actions: [
                 AuthStateChangeAction<SignedIn>((context, state) {
                   Navigator.pushReplacementNamed(context, '/profile');
@@ -53,12 +59,12 @@ class _MyAppState extends State<MyApp> {
                   Navigator.pushReplacementNamed(context, '/sign-in');
                 }),
               ],
-            );
+            );*/
           },
         });
   }
 }
-
+/*
 class MyApp2 extends StatelessWidget {
   const MyApp2({super.key});
 
@@ -76,3 +82,4 @@ class MyApp2 extends StatelessWidget {
         ])));
   }
 }
+*/

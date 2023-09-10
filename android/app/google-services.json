@@ -29,6 +29,13 @@
             {
               "client_id": "26446727063-khr9jlda74jjssffdo22g2574f2mmm93.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "26446727063-ac6hc9flgbpfhjl6rd6usl9tpishh9fc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sealchat.RunnerTests"
+              }
             }
           ]
         }
