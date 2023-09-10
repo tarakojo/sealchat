@@ -1,24 +1,20 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
-//import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import './firebase_options.dart';
-import 'package:flutter/services.dart' ;
 
 Future main() async {
-  print("!!");
-
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
- 
-/*
+
   FirebaseUIAuth.configureProviders([
     GoogleProvider(
         clientId:
             "26446727063-khr9jlda74jjssffdo22g2574f2mmm93.apps.googleusercontent.com"),
-  ]);*/
+  ]);
 
   runApp(MyApp());
 }
@@ -37,14 +33,11 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        initialRoute:'/sign-in',
-          //  FirebaseAuth.instance.currentUser == null ? '/sign-in' : '/profile',
+        initialRoute:
+            FirebaseAuth.instance.currentUser == null ? '/sign-in' : '/profile',
         routes: {
           '/sign-in': (context) {
-            return Container(
-              child: Text("aaaaa"),
-            );
-            /* SignInScreen(
+            return SignInScreen(
               actions: [
                 AuthStateChangeAction<SignedIn>((context, state) {
                   Navigator.pushReplacementNamed(context, '/profile');
@@ -59,7 +52,7 @@ class _MyAppState extends State<MyApp> {
                   Navigator.pushReplacementNamed(context, '/sign-in');
                 }),
               ],
-            );*/
+            );
           },
         });
   }

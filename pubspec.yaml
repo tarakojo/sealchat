@@ -37,13 +37,17 @@ dependencies:
   flutter_chat_ui: ^1.6.9
   logger: ^2.0.1
   
-  firebase_core: 2.14.0
+  firebase_core: ^2.14.0
 
   flutter_native_splash: ^2.3.2
 
   connectivity_plus: ^4.0.2
   device_info_plus: ^9.0.3
   package_info_plus: ^4.1.0
+  firebase_auth: ^4.9.0
+  firebase_ui_auth: ^1.8.0
+  google_sign_in: ^6.1.5
+  firebase_ui_oauth_google: ^1.2.11
   
 
 dev_dependencies:
@@ -81,10 +85,10 @@ flutter:
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
 
-#  fonts:
-#    - family: SocialIcons
-#      fonts:
-#        - asset: packages/firebase_ui_auth/fonts/SocialIcons.ttf
+  fonts:
+    - family: SocialIcons
+      fonts:
+        - asset: packages/firebase_ui_auth/fonts/SocialIcons.ttf
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
