@@ -4,7 +4,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
-import 'package:sealchat/ui/sealview.dart';
+import 'package:cloud_functions/cloud_functions.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:sealchat/logger.dart';
+import 'package:sealchat/ui/mainview/main_view.dart';
+import 'package:sealchat/ui/mainview/seal_view.dart';
 import './firebase_options.dart';
 
 Future main() async {
@@ -27,6 +31,11 @@ Future initFirebase() async {
         clientId:
             "26446727063-khr9jlda74jjssffdo22g2574f2mmm93.apps.googleusercontent.com"),
   ]);
+
+  //FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+  FirebaseFunctions.instance.useFunctionsEmulator('localhost', 5001);
+  FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
+
 }
 
 class App extends StatefulWidget {
@@ -42,9 +51,10 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: Scaffold(body: SealView()));
-    /*
-        initialRoute:
+    return MaterialApp(
+        home: Scaffold(body: MainView()));
+
+     /*   initialRoute:
             FirebaseAuth.instance.currentUser == null ? '/sign-in' : '/profile',
         routes: {
           '/sign-in': (context) {
@@ -57,13 +67,13 @@ class _AppState extends State<App> {
             );
           },
           '/profile': (context) {
-            return ProfileScreen(
-              actions: [
-                SignedOutAction((context) {
-                  Navigator.pushReplacementNamed(context, '/sign-in');
-                }),
-              ],
-            );
+            FirebaseFunctions.instance
+                .httpsCallable('helloWorld')
+                .call()
+                .then((result) {
+              logger.d(result.data);
+            });
+            return Text("Profile");
           },
         });*/
   }

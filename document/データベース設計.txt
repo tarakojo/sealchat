@@ -1,0 +1,10 @@
+
+
+データベース
+
+/users/<firebase authのuid>/
+--iap_last_sync : datetime 
+--remaining_consumable : int 
+--remaining_subscription : int 
+
+

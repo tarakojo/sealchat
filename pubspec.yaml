@@ -32,14 +32,15 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
+
   flutter_inappwebview: ^6.0.0-beta.24+1
   url_launcher: ^6.1.14
-  flutter_chat_ui: ^1.6.9
+  pointer_interceptor: ^0.9.3+6
   logger: ^2.0.1
+  flutter_native_splash: ^2.3.2
   
   firebase_core: ^2.14.0
 
-  flutter_native_splash: ^2.3.2
 
   connectivity_plus: ^4.0.2
   device_info_plus: ^9.0.3
@@ -48,6 +49,9 @@ dependencies:
   firebase_ui_auth: ^1.8.0
   google_sign_in: ^6.1.5
   firebase_ui_oauth_google: ^1.2.11
+  cloud_functions: ^4.4.0
+  cloud_firestore: ^4.9.1
+  awesome_dialog: ^3.1.0
   
 
 dev_dependencies:
