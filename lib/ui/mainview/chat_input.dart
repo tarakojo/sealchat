@@ -1,4 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:sealchat/logger.dart';
 
@@ -49,6 +50,12 @@ class _ChatInputState extends State<ChatInput> {
   }
 
   onSubmitted() {
+     FirebaseFunctions.instance
+                .httpsCallable('testRevenueCat')
+                .call()
+                .then((result) {
+              logger.d(result.data);
+            });
     AwesomeDialog(
       context: context,
       dialogType: DialogType.info,

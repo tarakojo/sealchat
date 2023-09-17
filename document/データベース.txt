@@ -6,5 +6,3 @@
 --iap_last_sync : datetime 
 --remaining_consumable : int 
 --remaining_subscription : int 
-
-

@@ -12,8 +12,12 @@ Future initSealView() async {
   }
 }
 
+class SealViewController {}
+
 class SealView extends StatefulWidget {
-  const SealView({super.key});
+  const SealView({super.key, required this.onCreated});
+
+  final void Function(SealViewController) onCreated;
 
   @override
   State<SealView> createState() => _SealViewState();
@@ -26,26 +30,31 @@ class _SealViewState extends State<SealView> {
       webViewAssetLoader: WebViewAssetLoader(
           pathHandlers: [AssetsPathHandler(path: '/assets/')]));
 
+  final sealViewController = SealViewController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    widget.onCreated(sealViewController);
+  }
+
   @override
   Widget build(BuildContext context) {
-
     final WebUri url;
-    if(kIsWeb){
+    if (kIsWeb) {
       url = WebUri("./assets/assets/sealview/index.html");
-    }
-    else if (Platform.isAndroid){
+    } else if (Platform.isAndroid) {
       url = WebUri(
-                  "https://appassets.androidplatform.net/assets/flutter_assets/assets/sealview/index.html");
-    }
-    else{
+          "https://appassets.androidplatform.net/assets/flutter_assets/assets/sealview/index.html");
+    } else {
       logger.f("SealView for this platform is not yet implemented");
       throw Error();
     }
 
     return InAppWebView(
       key: webViewKey,
-      initialUrlRequest: URLRequest(
-          url: url),
+      initialUrlRequest: URLRequest(url: url),
       initialSettings: settings,
       onWebViewCreated: (controller) {
         webViewController = controller;
