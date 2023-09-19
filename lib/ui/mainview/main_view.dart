@@ -1,8 +1,12 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:provider/provider.dart';
+import 'package:sealchat/account/account.dart';
+import 'package:sealchat/logger.dart';
+import 'package:sealchat/main.dart';
 import 'package:sealchat/ui/mainview/seal_view.dart';
 import 'package:sealchat/ui/mainview/main_view_normal_ui.dart';
 import 'package:sealchat/ui/mainview/main_view_opening.dart';
@@ -15,12 +19,13 @@ class MainView extends StatefulWidget {
 }
 
 class _MainViewState extends State<MainView> {
-  late final SealViewController sealViewController;
+  SealViewController? sealViewController;
   //オープニングを表示するかのフラグ
   bool showOpening = true;
 
   @override
   Widget build(BuildContext context) {
+    final account = context.watch<Account>();
     final Widget ui;
 
     if (FirebaseAuth.instance.currentUser == null) {
@@ -48,12 +53,31 @@ class _MainViewState extends State<MainView> {
       showOpening = false;
 
       /*
-      todo : サブスクリプションのチェックをし、サブスクリプションが有効であれば通常のUIを表示し、
-      そうでない場合、サブスクリプション購入画面を表示する。
+      サブスクリプションのチェックをし、サブスクリプションが有効であれば通常のUIを表示し、
+      そうでない場合、その旨をダイアログで通知し、サブスクリプション購入画面を表示する。
       */
-
-      //通常のUIを表示
-      ui = MainViewNormalUI();
+      if (account.info!.subscriptionState == SubscriptionState.inactive) {
+        ui = FutureBuilder(
+            future: AwesomeDialog(
+              context: context,
+              dialogType: DialogType.info,
+              title: 'seal wakes up',
+              btnOkOnPress: () {},
+            ).show(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return const Placeholder();
+              }
+              return ElevatedButton(
+                  onPressed: () {
+                    logger.d("todo : paywall周りの実装!");
+                  },
+                  child: Text("purchase"));
+            });
+      } else {
+        //通常のUIを表示
+        ui = MainViewNormalUI();
+      }
     }
 
     return Stack(fit: StackFit.expand, children: [
@@ -67,7 +91,7 @@ class _MainViewState extends State<MainView> {
       */
       PointerInterceptor(
           //sealViewControllerを伝播する
-          child: Provider<SealViewController>.value(
+          child: Provider<SealViewController?>.value(
         value: sealViewController,
         child: ui,
       ))

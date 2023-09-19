@@ -1,0 +1,17 @@
+
+
+type AccountData = {
+    subscriptionState : "inactive" | "normal"
+    subscriptionRemainingChats : int
+    consumableRemainingChats : int 
+}
+
+syncPurchases 
+    revenuecatの購入情報でデータベースを更新
+    返却値 AccountData
+
+getAccountInfo 
+    アカウントの情報を得る
+    返却値 AccountData 
+
+
