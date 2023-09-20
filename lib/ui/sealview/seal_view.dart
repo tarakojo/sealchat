@@ -4,6 +4,7 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sealchat/logger.dart';
 
 Future initSealView() async {
@@ -12,12 +13,13 @@ Future initSealView() async {
   }
 }
 
+final sealViewControllerProvider =
+    Provider<SealViewController>((ref) => SealViewController());
+
 class SealViewController {}
 
 class SealView extends StatefulWidget {
-  const SealView({super.key, required this.onCreated});
-
-  final void Function(SealViewController) onCreated;
+  const SealView({super.key});
 
   @override
   State<SealView> createState() => _SealViewState();
@@ -31,13 +33,6 @@ class _SealViewState extends State<SealView> {
           pathHandlers: [AssetsPathHandler(path: '/assets/')]));
 
   final sealViewController = SealViewController();
-
-  @override
-  void initState() {
-    super.initState();
-
-    widget.onCreated(sealViewController);
-  }
 
   @override
   Widget build(BuildContext context) {

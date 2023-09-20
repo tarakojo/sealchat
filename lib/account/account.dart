@@ -1,8 +1,13 @@
 //サブスクリプションの状態
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:sealchat/account/purchases.dart';
 import 'package:sealchat/logger.dart';
+
+//アカウント情報のプロバイダー
+final accountProvider = ChangeNotifierProvider((ref) => Account());
 
 /*
  アカウント情報の操作と管理を行うクラス
@@ -65,6 +70,13 @@ class Account extends ChangeNotifier {
     info = null;
     logger.d("signed out");
   }
+
+  bool get isSignedIn => info != null;
+  bool get isSubscriptionActive =>
+      info?.subscriptionState == SubscriptionState.normal;
+  bool get isRemainingZero =>
+      info?.subscriptionRemainingChats == 0 &&
+      info?.consumableRemainingChats == 0;
 }
 
 //サブスクリプションの状態
