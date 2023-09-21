@@ -2,6 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:sealchat/logger.dart';
 
+
+//サブスクリプションプラン
+enum SubscriptionPlan {
+  normal,
+}
+
 /*
 購入処理関連の処理を行うクラス
 現状、revenuecat sdkはwebに対応していないので、プラットフォームによって処理を分ける必要がある

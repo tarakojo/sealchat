@@ -40,8 +40,10 @@ class _OpeningState extends ConsumerState<Opening> {
       builder: (context, dismiss) {
         return ElevatedButton(
             onPressed: () {
-              dismiss();
-              mainViewEvent.update(MainViewEvent.firstSubscription);
+              showSignInScreen(context, onSignedIn: () {
+                dismiss();
+                mainViewEvent.update(MainViewEvent.none);
+              });
             },
             child: Text("opening"));
       },

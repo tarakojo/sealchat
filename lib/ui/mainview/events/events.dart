@@ -11,9 +11,9 @@ import 'package:sealchat/ui/signin_screen.dart';
 //メイン画面のイベントを識別するenum
 enum MainViewEvent {
   opening,
-  firstSubscription,
-  subscriptionInactive,
-  remainingZero,
+//  firstSubscription,
+//  subscriptionInactive,
+//  remainingZero,
   none,
 }
 
@@ -44,7 +44,15 @@ class MainViewEventNotifier extends ChangeNotifier {
 
   //アカウント情報からイベントを更新する
   void updateEventFromAccountInfo(Account account, bool notify) {
-    if (event == MainViewEvent.firstSubscription) {
+if (!account.isSignedIn) {
+      //ログインしていない場合
+      update(MainViewEvent.opening, notify: notify);
+    } else {
+      //ログインしている場合
+      update(MainViewEvent.none, notify: notify);
+    }
+
+/*    if (event == MainViewEvent.firstSubscription) {
       //初回サブスクリプションオファーをしている場合
       return;
     } else if (!account.isSignedIn) {
@@ -59,7 +67,7 @@ class MainViewEventNotifier extends ChangeNotifier {
     } else {
       /* todo : アップグレードオファーをたまに出す？ */
       update(MainViewEvent.none, notify: notify);
-    }
+    }*/
   }
 }
 
@@ -67,6 +75,7 @@ class MainViewEventNotifier extends ChangeNotifier {
 final mainViewEventProvider = ChangeNotifierProvider(
     (ref) => MainViewEventNotifier(event: MainViewEvent.opening));
 
+/*
 //初回サブスクリプションのダイアログを表示するイベントのウィジェット
 class FirstSubscription extends ConsumerWidget {
   const FirstSubscription({super.key});
@@ -77,8 +86,10 @@ class FirstSubscription extends ConsumerWidget {
     return OneTimeDialog(dialog: AppDialog(builder: (context, dismiss) {
       return ElevatedButton(
           onPressed: () {
-            dismiss();
-            mainViewEvent.update(MainViewEvent.none);
+            showSignInScreen(context, onSignedIn: () {
+              dismiss();
+              mainViewEvent.update(MainViewEvent.none);
+            });
           },
           child: Text("first subscription!"));
     }));
@@ -94,10 +105,8 @@ class RemainingZero extends ConsumerWidget {
     return OneTimeDialog(dialog: AppDialog(builder: (context, dismiss) {
       return ElevatedButton(
           onPressed: () {
-            showSignInScreen(context, onSignedIn: () {
-              dismiss();
-              mainViewEvent.update(MainViewEvent.none);
-            });
+            dismiss();
+            mainViewEvent.update(MainViewEvent.none);
           },
           child: Text("remaining zero"));
     }));
@@ -119,4 +128,4 @@ class SubscriptionInactive extends ConsumerWidget {
           child: Text("subscription inactive"));
     }));
   }
-}
+}*/
