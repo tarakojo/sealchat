@@ -33,8 +33,8 @@ class MainView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final account = ref.watch<Account>(accountProvider);
-    final mainViewEvent = ref.read(mainViewEventProvider);
+    final account = ref.watch(accountProvider);
+    final mainViewEvent = ref.watch(mainViewEventProvider);
 
     mainViewEvent.updateEventFromAccountInfo(account, false);
 

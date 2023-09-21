@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sealchat/logger.dart';
+import 'package:sealchat/ui/dialog.dart';
 import 'package:sealchat/ui/mainview/events/events.dart';
 import 'package:sealchat/ui/mainview/main_view.dart';
 import 'package:sealchat/ui/signin_screen.dart';
@@ -35,18 +36,15 @@ class _OpeningState extends ConsumerState<Opening> {
   @override
   Widget build(BuildContext context) {
     final mainViewEvent = ref.watch(mainViewEventProvider);
-    Future(
-      () {
-        AwesomeDialog(
-          context: context,
-          dialogType: DialogType.info,
-          title: 'opening',
-          btnOkOnPress: () {
-            mainViewEvent.update(MainViewEvent.firstSubscription);
-          },
-        )..show();
+    return OneTimeDialog(dialog: AppDialog(
+      builder: (context, dismiss) {
+        return ElevatedButton(
+            onPressed: () {
+              dismiss();
+              mainViewEvent.update(MainViewEvent.firstSubscription);
+            },
+            child: Text("opening"));
       },
-    );
-    return Container();
+    ));
   }
 }

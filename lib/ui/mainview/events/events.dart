@@ -1,11 +1,10 @@
-
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sealchat/account/account.dart';
 import 'package:sealchat/logger.dart';
-
+import 'package:sealchat/ui/dialog.dart';
+import 'package:sealchat/ui/signin_screen.dart';
 
 //メイン画面の演出についてのコード
 
@@ -68,16 +67,21 @@ class MainViewEventNotifier extends ChangeNotifier {
 final mainViewEventProvider = ChangeNotifierProvider(
     (ref) => MainViewEventNotifier(event: MainViewEvent.opening));
 
-
 //初回サブスクリプションのダイアログを表示するイベントのウィジェット
 class FirstSubscription extends ConsumerWidget {
   const FirstSubscription({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final account = ref.read(accountProvider);
-    logger.d("first subscription event shown");
-    return Container();
+    final mainViewEvent = ref.read(mainViewEventProvider);
+    return OneTimeDialog(dialog: AppDialog(builder: (context, dismiss) {
+      return ElevatedButton(
+          onPressed: () {
+            dismiss();
+            mainViewEvent.update(MainViewEvent.none);
+          },
+          child: Text("first subscription!"));
+    }));
   }
 }
 
@@ -86,9 +90,17 @@ class RemainingZero extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final account = ref.read(accountProvider);
-    logger.d("remaining zero event shown");
-    return Container();
+    final mainViewEvent = ref.read(mainViewEventProvider);
+    return OneTimeDialog(dialog: AppDialog(builder: (context, dismiss) {
+      return ElevatedButton(
+          onPressed: () {
+            showSignInScreen(context, onSignedIn: () {
+              dismiss();
+              mainViewEvent.update(MainViewEvent.none);
+            });
+          },
+          child: Text("remaining zero"));
+    }));
   }
 }
 
@@ -97,8 +109,14 @@ class SubscriptionInactive extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final account = ref.read(accountProvider);
-    logger.d("subscription inactive event shown");
-    return Container();
+    final mainViewEvent = ref.read(mainViewEventProvider);
+    return OneTimeDialog(dialog: AppDialog(builder: (context, dismiss) {
+      return ElevatedButton(
+          onPressed: () {
+            dismiss();
+            mainViewEvent.update(MainViewEvent.none);
+          },
+          child: Text("subscription inactive"));
+    }));
   }
 }
