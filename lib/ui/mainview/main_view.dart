@@ -20,12 +20,6 @@ class MainView extends ConsumerWidget {
     switch (mainViewEventNotifier.event) {
       case MainViewEvent.opening:
         return Opening(key: mainViewEventNotifier.eventKey);
-      /*   case MainViewEvent.firstSubscription:
-        return FirstSubscription(key: mainViewEventNotifier.eventKey);
-      case MainViewEvent.subscriptionInactive:
-        return SubscriptionInactive(key: mainViewEventNotifier.eventKey);
-      case MainViewEvent.remainingZero:
-        return RemainingZero(key: mainViewEventNotifier.eventKey);*/
       case MainViewEvent.none:
         return Container(key: mainViewEventNotifier.eventKey);
     }
@@ -37,11 +31,8 @@ class MainView extends ConsumerWidget {
     final mainViewEvent = ref.watch(mainViewEventProvider);
 
     mainViewEvent.updateEventFromAccountInfo(account, false);
-
     final eventWidget = this.eventWidget(mainViewEvent);
     final showControls = mainViewEvent.event != MainViewEvent.opening;
-    /* final showControls = mainViewEvent.event != MainViewEvent.opening &&
-        mainViewEvent.event != MainViewEvent.firstSubscription; */
 
     return Stack(fit: StackFit.expand, children: [
       // SealView(),

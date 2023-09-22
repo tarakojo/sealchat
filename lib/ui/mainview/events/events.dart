@@ -11,9 +11,6 @@ import 'package:sealchat/ui/signin_screen.dart';
 //メイン画面のイベントを識別するenum
 enum MainViewEvent {
   opening,
-//  firstSubscription,
-//  subscriptionInactive,
-//  remainingZero,
   none,
 }
 
@@ -51,23 +48,6 @@ if (!account.isSignedIn) {
       //ログインしている場合
       update(MainViewEvent.none, notify: notify);
     }
-
-/*    if (event == MainViewEvent.firstSubscription) {
-      //初回サブスクリプションオファーをしている場合
-      return;
-    } else if (!account.isSignedIn) {
-      //ログインしていない場合
-      update(MainViewEvent.opening, notify: notify);
-    } else if (!account.isSubscriptionActive) {
-      //サブスクリプションが無効な場合
-      update(MainViewEvent.subscriptionInactive, notify: notify);
-    } else if (account.isRemainingZero) {
-      //チャット残り回数が0の場合
-      update(MainViewEvent.remainingZero, notify: notify);
-    } else {
-      /* todo : アップグレードオファーをたまに出す？ */
-      update(MainViewEvent.none, notify: notify);
-    }*/
   }
 }
 
@@ -75,57 +55,3 @@ if (!account.isSignedIn) {
 final mainViewEventProvider = ChangeNotifierProvider(
     (ref) => MainViewEventNotifier(event: MainViewEvent.opening));
 
-/*
-//初回サブスクリプションのダイアログを表示するイベントのウィジェット
-class FirstSubscription extends ConsumerWidget {
-  const FirstSubscription({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final mainViewEvent = ref.read(mainViewEventProvider);
-    return OneTimeDialog(dialog: AppDialog(builder: (context, dismiss) {
-      return ElevatedButton(
-          onPressed: () {
-            showSignInScreen(context, onSignedIn: () {
-              dismiss();
-              mainViewEvent.update(MainViewEvent.none);
-            });
-          },
-          child: Text("first subscription!"));
-    }));
-  }
-}
-
-class RemainingZero extends ConsumerWidget {
-  const RemainingZero({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final mainViewEvent = ref.read(mainViewEventProvider);
-    return OneTimeDialog(dialog: AppDialog(builder: (context, dismiss) {
-      return ElevatedButton(
-          onPressed: () {
-            dismiss();
-            mainViewEvent.update(MainViewEvent.none);
-          },
-          child: Text("remaining zero"));
-    }));
-  }
-}
-
-class SubscriptionInactive extends ConsumerWidget {
-  const SubscriptionInactive({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final mainViewEvent = ref.read(mainViewEventProvider);
-    return OneTimeDialog(dialog: AppDialog(builder: (context, dismiss) {
-      return ElevatedButton(
-          onPressed: () {
-            dismiss();
-            mainViewEvent.update(MainViewEvent.none);
-          },
-          child: Text("subscription inactive"));
-    }));
-  }
-}*/

@@ -49,19 +49,23 @@ class _ChatInputState extends State<ChatInput> {
     super.dispose();
   }
 
-  onSubmitted() {
-     FirebaseFunctions.instance
-                .httpsCallable('testRevenueCat')
-                .call()
-                .then((result) {
-              logger.d(result.data);
-            });
+  onSubmitted() async {
+    FirebaseFunctions.instance
+        .httpsCallable('testRevenueCat')
+        .call()
+        .then((result) {
+      logger.d(result.data);
+    });
+
+    HttpsCallableResult result = await FirebaseFunctions.instance
+        .httpsCallable('on_call_example')
+        .call();
     AwesomeDialog(
       context: context,
       dialogType: DialogType.info,
       animType: AnimType.rightSlide,
       title: 'Dialog Title',
-      desc: 'Dialog description here.............',
+      desc: result.data["massage"],
       btnCancelOnPress: () {},
       btnOkOnPress: () {},
     )..show();

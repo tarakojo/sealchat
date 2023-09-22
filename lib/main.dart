@@ -11,7 +11,6 @@ import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:sealchat/account/account.dart';
 import 'package:sealchat/logger.dart';
-import 'package:sealchat/account/purchases.dart';
 import 'package:sealchat/ui/mainview/main_view.dart';
 import 'package:sealchat/ui/sealview/seal_view.dart';
 import './firebase_options.dart';
@@ -25,7 +24,6 @@ Future main() async {
   final initTasks = [
     initSealView(),
     initFirebase(),
-    PurchaseWrapper.init(),
   ];
   await Future.wait(initTasks);
 
