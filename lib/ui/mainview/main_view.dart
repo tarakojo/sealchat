@@ -35,7 +35,7 @@ class MainView extends ConsumerWidget {
     final showControls = mainViewEvent.event != MainViewEvent.opening;
 
     return Stack(fit: StackFit.expand, children: [
-      // SealView(),
+      SealView(),
 
       /*
         inappwebviewの上にあるウィジェットは、ただ配置しただけではタップなどのイベントを拾えないので

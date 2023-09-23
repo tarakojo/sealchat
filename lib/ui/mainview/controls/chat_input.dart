@@ -13,6 +13,7 @@ class ChatInput extends StatefulWidget {
 class _ChatInputState extends State<ChatInput> {
   final textEditingController = TextEditingController();
   final focusNode = FocusNode();
+  bool submitLock = false;
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +24,11 @@ class _ChatInputState extends State<ChatInput> {
             autofocus: true,
             focusNode: focusNode,
             controller: textEditingController,
-            onSubmitted: (value) {
+            onSubmitted: (_) {
+              if (submitLock) return;
+              submitLock = true;
               onSubmitted();
+              submitLock = false;
             },
             decoration: InputDecoration(
               hintText: 'Enter text',
@@ -35,7 +39,10 @@ class _ChatInputState extends State<ChatInput> {
         ),
         ElevatedButton(
           onPressed: () {
+            if (submitLock) return;
+            submitLock = true;
             onSubmitted();
+            submitLock = false;
           },
           child: Text('送信'),
         ),
@@ -50,22 +57,17 @@ class _ChatInputState extends State<ChatInput> {
   }
 
   onSubmitted() async {
-    FirebaseFunctions.instance
-        .httpsCallable('testRevenueCat')
-        .call()
-        .then((result) {
-      logger.d(result.data);
-    });
-
     HttpsCallableResult result = await FirebaseFunctions.instance
-        .httpsCallable('on_call_example')
-        .call();
+        .httpsCallable('seal_response')
+        .call({"message": textEditingController.text});
+    final data = result.data as Map<String, dynamic>;
+    final message = data['message'];
     AwesomeDialog(
       context: context,
       dialogType: DialogType.info,
       animType: AnimType.rightSlide,
       title: 'Dialog Title',
-      desc: result.data["massage"],
+      desc: message,
       btnCancelOnPress: () {},
       btnOkOnPress: () {},
     )..show();

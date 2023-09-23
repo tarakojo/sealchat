@@ -9,12 +9,13 @@ import { CubismMatrix44 } from './framework/math/cubismmatrix44';
 import { CubismViewMatrix } from './framework/math/cubismviewmatrix';
 
 import * as LAppDefine from './lappdefine';
-import { canvas, gl, LAppDelegate } from './lappdelegate';
+import { LAppDelegate } from './lappdelegate';
 import { LAppLive2DManager } from './lapplive2dmanager';
 import { LAppPal } from './lapppal';
 import { LAppSprite } from './lappsprite';
 import { TextureInfo } from './lapptexturemanager';
 import { TouchManager } from './touchmanager';
+import { canvas, gl } from '../main';
 
 /**
  * 描画クラス。

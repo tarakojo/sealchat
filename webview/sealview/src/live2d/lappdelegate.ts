@@ -12,11 +12,9 @@ import { LAppLive2DManager } from './lapplive2dmanager';
 import { LAppPal } from './lapppal';
 import { LAppTextureManager } from './lapptexturemanager';
 import { LAppView } from './lappview';
+import { canvas, gl } from '../main';
 
-export let canvas: HTMLCanvasElement = null;
 export let s_instance: LAppDelegate = null;
-export let gl: WebGLRenderingContext = null;
-export let frameBuffer: WebGLFramebuffer = null;
 
 /**
  * アプリケーションクラス。
@@ -52,41 +50,7 @@ export class LAppDelegate {
    * APPに必要な物を初期化する。
    */
   public initialize(): boolean {
-    // キャンバスの作成
-    canvas = document.createElement('canvas');
-    if (LAppDefine.CanvasSize === 'auto') {
-      this._resizeCanvas();
-    } else {
-      canvas.width = LAppDefine.CanvasSize.width;
-      canvas.height = LAppDefine.CanvasSize.height;
-    }
-
-    // glコンテキストを初期化
-    // @ts-ignore
-    gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-
-    if (!gl) {
-      alert('Cannot initialize WebGL. This browser does not support.');
-      gl = null;
-
-      document.body.innerHTML =
-        'This browser does not support the <code>&lt;canvas&gt;</code> element.';
-
-      // gl初期化失敗
-      return false;
-    }
-
-    // キャンバスを DOM に追加
-    document.body.appendChild(canvas);
-
-    if (!frameBuffer) {
-      frameBuffer = gl.getParameter(gl.FRAMEBUFFER_BINDING);
-    }
-
-    // 透過設定
-    gl.enable(gl.BLEND);
-    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-
+    
     const supportTouch: boolean = 'ontouchend' in canvas;
 
     if (supportTouch) {
@@ -115,7 +79,6 @@ export class LAppDelegate {
    * Resize canvas and re-initialize view.
    */
   public onResize(): void {
-    this._resizeCanvas();
     this._view.initialize();
    // this._view.initializeSprite();
 
@@ -293,10 +256,10 @@ export class LAppDelegate {
   /**
    * Resize the canvas to fill the screen.
    */
-  private _resizeCanvas(): void {
+ /* private _resizeCanvas(): void {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-  }
+  }*/
 
   _cubismOption: Option; // Cubism SDK Option
   _view: LAppView; // View情報

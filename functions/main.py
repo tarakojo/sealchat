@@ -1,18 +1,18 @@
-# Welcome to Cloud Functions for Firebase for Python!
-# To get started, simply uncomment the below code or create your own.
-# Deploy with `firebase deploy`
-
+# 環境変数の読み込み
+from dotenv import load_dotenv
+load_dotenv()
+ 
+# firebaseの初期化
 from firebase_functions import https_fn
 from firebase_admin import initialize_app
-
 initialize_app()
 
-@https_fn.on_request()
-def on_request_example(req: https_fn.Request) -> https_fn.Response:
-    return https_fn.Response("Hello world!")
+
+import chat
 
 @https_fn.on_call()
-def on_call_example(req: https_fn.Request):
+def seal_response(req: https_fn.Request):
+    chat_response = chat.chat(system_message="please anser yes or no", message=req.data["message"])
     return {
-        "message": "Hello world!"
+        "message": chat_response
     }

@@ -39,11 +39,13 @@ import {
 } from './framework/utils/cubismdebug';
 
 import * as LAppDefine from './lappdefine';
-import { canvas, frameBuffer, gl, LAppDelegate } from './lappdelegate';
+import { LAppDelegate } from './lappdelegate';
 import { LAppPal } from './lapppal';
 import { TextureInfo } from './lapptexturemanager';
 import { LAppWavFileHandler } from './lappwavfilehandler';
 import { CubismMoc } from './framework/model/cubismmoc';
+
+import { canvas, gl, frameBuffer } from '../main';
 
 enum LoadStep {
   LoadAssets,

@@ -10,9 +10,9 @@ import { ACubismMotion } from './framework/motion/acubismmotion';
 import { csmVector } from './framework/type/csmvector';
 
 import * as LAppDefine from './lappdefine';
-import { canvas } from './lappdelegate';
 import { LAppModel } from './lappmodel';
 import { LAppPal } from './lapppal';
+import { canvas } from '../main';
 
 export let s_instance: LAppLive2DManager = null;
 

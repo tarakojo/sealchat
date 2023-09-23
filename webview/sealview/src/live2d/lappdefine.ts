@@ -12,7 +12,7 @@ import { LogLevel } from './framework/live2dcubismframework';
  */
 
 // Canvas width and height pixel values, or dynamic screen size ('auto').
-export const CanvasSize: { width: number; height: number } | 'auto' = 'auto';
+//export const CanvasSize: { width: number; height: number } | 'auto' = 'auto';
 
 // 画面
 export const ViewScale = 1.0;
