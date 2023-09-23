@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=1900">
-  <title>TypeScript HTML App</title>
-  <style>
-    html, body {
-        margin: 0;
-        overflow: hidden;
-    }
-  </style>
-  <!-- Pollyfill script -->
-  <script src="https://unpkg.com/core-js-bundle@3.6.1/minified.js"></script>
-  
-  <script src="./live2dcubismcore.min.js"></script>
-  <script src="./bundle.js"></script>
+<meta charset="UTF-8">
+<title>Simple Live2D</title>
+</meta>
+<style>
+body { margin: 0; }
+canvas { width: 100%; height: 100% }
+</style>
 </head>
 <body>
+
+<script src="./scripts/live2d/Core/live2dcubismcore.min.js"></script>
+<script type="module" src="./scripts/live2d/Framework/live2dcubismframework.js"></script>
+<script src="./scripts/live2d/Live2DRender.js"></script>
+
+<script src="./bundle.js"></script>
+
 </body>
 </html>
