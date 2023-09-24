@@ -1,9 +1,10 @@
+
 /*
  * Live2D描画クラス
  * created by naotaro0123
  * https://github.com/naotaro0123/Live2D-ThreeJS
  */
-THREE.Live2DRender = function(renderer, filepath, filenm, scale) {
+export function Live2DRender(renderer, filepath, filenm, scale) {
     // WebGL ContextのWebGLRenderer
     if(renderer){
         this.gl = renderer.getContext();
@@ -102,7 +103,7 @@ THREE.Live2DRender = function(renderer, filepath, filenm, scale) {
 /*
  * Live2D描画クラスのファンクション
  */
-THREE.Live2DRender.prototype = {
+Live2DRender.prototype = {
 
     /**
     * WebGLコンテキストを取得・初期化。
@@ -625,7 +626,7 @@ THREE.Live2DRender.prototype = {
 /****************************************
 * サウンドクラス
 ****************************************/
-var L2DSound = function(path /*音声ファイルパス*/) {
+export var L2DSound = function(path /*音声ファイルパス*/) {
     this.snd = document.createElement("audio");
     this.snd.src = path;
 };

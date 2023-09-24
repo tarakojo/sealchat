@@ -1,3 +1,7 @@
+import * as THREE from 'three';
+import { drawRotatingRectangle } from './rendertest';
+//import { Live2DRender } from "./live2d/Live2DRender";
+
 
 // シーン生成
 var scene = new THREE.Scene();
@@ -38,7 +42,7 @@ scene.add( backmesh );
 var MODEL_PATH1 = "../../assets/Epsilon2.1/";
 var MODEL_JSON1 = "Epsilon2.1.model.json";
 // Live2Dモデル生成
-var live2dmodel1 = new THREE.Live2DRender( renderer, MODEL_PATH1, MODEL_JSON1 );
+//var live2dmodel1 = new Live2DRender( renderer, MODEL_PATH1, MODEL_JSON1 );
 
 // オフスクリーンを描画するPlane生成
 var geometry1 = new THREE.PlaneGeometry( 6, 6, 1, 1 );
@@ -65,7 +69,7 @@ document.addEventListener('contextmenu', function(e){
     // 右クリックの挙動を阻止する
     e.preventDefault();    
 }, false);
-
+/*
 // マウスクリック処理
 document.addEventListener('mousedown', function(e){
     switch(e.button){
@@ -82,8 +86,10 @@ document.addEventListener('mousedown', function(e){
             // 例：live2dmodel.setExpression("f04.exp.json");
             break;            
     }
-});
+});*/
 
+
+const drawf = drawRotatingRectangle(renderer.getContext());
 
 /**
  * 描画処理
@@ -93,7 +99,9 @@ var render = function () {
     // オフスクリーン切り替え描画
     renderer.render( offScene1, camera, offRenderTarget1 );
     // オフスクリーンにLive2D描画
-    live2dmodel1.draw();
+    //live2dmodel1.draw();
+    drawf();
+
     // resetGLStateしないとgl.useProgramが呼ばれず以下のエラーになる
     // [error]location is not from current program
     renderer.resetGLState();
