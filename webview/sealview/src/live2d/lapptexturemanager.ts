@@ -7,7 +7,7 @@
 
 import { csmVector, iterator } from './framework/type/csmvector';
 
-import { gl } from '../main';
+import { gl, canvas, frameBuffer } from './lappdelegate';
 
 /**
  * テクスチャ管理クラス

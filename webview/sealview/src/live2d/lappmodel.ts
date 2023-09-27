@@ -45,7 +45,7 @@ import { TextureInfo } from './lapptexturemanager';
 import { LAppWavFileHandler } from './lappwavfilehandler';
 import { CubismMoc } from './framework/model/cubismmoc';
 
-import { canvas, gl, frameBuffer } from '../main';
+import { gl, canvas, frameBuffer } from './lappdelegate';
 
 enum LoadStep {
   LoadAssets,
