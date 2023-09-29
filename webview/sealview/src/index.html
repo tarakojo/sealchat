@@ -19,22 +19,23 @@
       <video id="background_hiru" src="./assets/background/2023syogatsu_Background/syougatsu_hiru.mp4" muted loop autoplay></video>
       <video id="background_yoru" src="./assets/background/2023syogatsu_Background/syougatsu_yoru.mp4" muted loop autoplay></video>
     </div>
+    
     <canvas id="live2d_canvas"></canvas>
 
-    <div class="upper_hukidasi_container">
-      <img id="upper_hukidasi" src = "./assets/hukidasi.svg"/>
+    <div class="hukidasi_container" id="upper_hukidasi_container">
+      <img src = "./assets/hukidasi.svg"/>
       <div class = "upper_hukidasi_text_contrainer">
-        <p>aaa</p>
+        <p id="upper_hukidasi_text" >
+        </p>
       </div>
     </div>
     
-    <!--
-    <div class="hukidasi_container hukidasi_container_side">
-      <img id="hukidasi_side" src = "./assets/hukidasi_rotated.svg"/>
+    <div class="hukidasi_container" id="side_hukidasi_container">
+      <img id="side_hukidasi" src = "./assets/hukidasi_rotated.svg"/>
+      <div class="side_hukidasi_text_contrainer">
+        <p id="side_hukidasi_text" >
+        </p>
     </div>
-    <p style="position: absolute; font-family: mplus; font-size: large;">
-      こんにちは！
-    </p>-->
   </div>
 </body>
 </html>

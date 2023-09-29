@@ -1,23 +1,29 @@
 
 
-import { backgroundOnResize, updateBackground } from './background';
+import { backgroundOnResize, initBackground } from './background';
+import { hukidasiOnResize, initHukidasi, showHukidasi } from './hukidasi';
 import { LAppDelegate } from './live2d/lappdelegate';
 
 
 window.onload = () => {
-  //背景の設定
-  updateBackground();
-  setInterval(updateBackground, 1000 * 60); //1分ごとに背景を更新
+  const backgroundHeight= initBackground();
 
-  const backgroundHeight = backgroundOnResize().height;
   if (LAppDelegate.getInstance().initialize(backgroundHeight) == false) {
+    alert('Cannot initialize WebGL.');
     return;
   }
   LAppDelegate.getInstance().run();
+
+  initHukidasi();
 };
 
 window.onbeforeunload = (): void => LAppDelegate.releaseInstance();
 window.onresize = () => {
     const backgroundHeight = backgroundOnResize().height;
     LAppDelegate.getInstance().onResize(backgroundHeight);
+    hukidasiOnResize();
 };
+
+window.onclick = () => {
+  showHukidasi("クリックされたよ");
+}

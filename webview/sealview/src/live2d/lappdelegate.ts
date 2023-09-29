@@ -155,6 +155,23 @@ export class LAppDelegate {
    * 実行処理。
    */
   public run(): void {
+
+    // FPSの計測処理--------------------------
+    let tick = Date.now();
+    let frames = 0;
+
+    setInterval(() => {
+      const now = Date.now();
+      const elapsed = now - tick;
+      const fps = frames / (elapsed / 1000);
+      console.log(`${fps}fps`);
+      tick = now;
+      frames = 0;
+    },1000);
+    //---------------------------------------
+
+    let firstFrame = true;
+
     // メインループ
     const loop = (): void => {
       // インスタンスの有無の確認
@@ -187,6 +204,15 @@ export class LAppDelegate {
       // 描画更新
       this._view.render();
 
+      //フレーム数をカウント
+      ++frames;
+
+      // 初回フレームでのみ実行
+      if (firstFrame) {
+        firstFrame = false;
+        document.getElementById("live2d_canvas").style.opacity = "1";
+      }
+      
       // ループのために再帰呼び出し
       requestAnimationFrame(loop);
     };

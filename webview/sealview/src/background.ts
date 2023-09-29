@@ -2,10 +2,6 @@
 type background_type = "hiru" | "yoru";
 let currentBackgroundType : background_type | null = null;
 
-const backgroundImageWidth = 1920;
-const backgroundImageHeight = 1080;
-const backgroundAspect = backgroundImageWidth / backgroundImageHeight;
-
 //昼ならtrue夜ならfalseを返す
 function isDaytime() {
     const now = new Date();
@@ -34,16 +30,28 @@ function setBackground(t : background_type){
     currentBackgroundType = t;
 }
 
-export function updateBackground(){
+function updateBackground(){
     const t = isDaytime() ? "hiru" : "yoru";
     setBackground(t);
 }
 
+export function initBackground(){
+    updateBackground();
+     //1分ごとに背景を更新
+    setInterval(updateBackground, 1000 * 60);
+    
+    return backgroundOnResize().height;
+}
+
 //背景画像のリサイズ
 export function backgroundOnResize(){
+  
     const aspect = window.innerWidth / window.innerHeight;
     const hiru = document.getElementById("background_hiru") as HTMLVideoElement;
     const yoru = document.getElementById("background_yoru") as HTMLVideoElement;
+    
+    const backgroundAspect = parseFloat(getComputedStyle(hiru).getPropertyValue("--background_aspect"));
+
     let width, height;
     if(aspect > backgroundAspect){ 
         width = window.innerWidth;
