@@ -1,25 +1,23 @@
-/**
- * Copyright(c) Live2D Inc. All rights reserved.
- *
- * Use of this source code is governed by the Live2D Open Software license
- * that can be found at https://www.live2d.com/eula/live2d-open-software-license-agreement_en.html.
- */
 
-import { setBackgroundImage } from './background';
+
+import { backgroundOnResize, updateBackground } from './background';
 import { LAppDelegate } from './live2d/lappdelegate';
 
 
 window.onload = () => {
+  //背景の設定
+  updateBackground();
+  setInterval(updateBackground, 1000 * 60); //1分ごとに背景を更新
 
-  // create the application instance
-  if (LAppDelegate.getInstance().initialize() == false) {
+  const backgroundHeight = backgroundOnResize().height;
+  if (LAppDelegate.getInstance().initialize(backgroundHeight) == false) {
     return;
   }
-
   LAppDelegate.getInstance().run();
 };
 
 window.onbeforeunload = (): void => LAppDelegate.releaseInstance();
 window.onresize = () => {
-    LAppDelegate.getInstance().onResize();
+    const backgroundHeight = backgroundOnResize().height;
+    LAppDelegate.getInstance().onResize(backgroundHeight);
 };

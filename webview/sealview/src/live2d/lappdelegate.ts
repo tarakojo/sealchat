@@ -51,12 +51,12 @@ export class LAppDelegate {
   /**
    * APPに必要な物を初期化する。
    */
-  public initialize(): boolean {
+  public initialize(backgroundHeight : number): boolean {
     
     // キャンバスの作成
     //canvas = document.createElement('canvas');
     canvas = document.getElementById('live2d_canvas') as HTMLCanvasElement;
-    this._resizeCanvas();
+    this._resizeCanvas(backgroundHeight);
 
     // glコンテキストを初期化
     // @ts-ignore
@@ -112,8 +112,19 @@ export class LAppDelegate {
   /**
    * Resize canvas and re-initialize view.
    */
+  /*
   public onResize(): void {
     this._resizeCanvas();
+    this._view.initialize();
+   // this._view.initializeSprite();
+
+    // キャンバスサイズを渡す
+    const viewport: number[] = [0, 0, canvas.width, canvas.height];
+
+    gl.viewport(viewport[0], viewport[1], viewport[2], viewport[3]);
+  }*/
+  public onResize(backgroundHeight : number): void {
+    this._resizeCanvas(backgroundHeight);
     this._view.initialize();
    // this._view.initializeSprite();
 
@@ -292,14 +303,15 @@ export class LAppDelegate {
   /**
    * Resize the canvas to fill the screen.
    */
-  private _resizeCanvas(): void {
+  private _resizeCanvas(backgroundHeight : number): void {
     /*canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;*/
 
     const height_ratio = parseFloat(getComputedStyle(canvas).getPropertyValue("--live2d_canvas_height_ratio"));
+    const newHeight = backgroundHeight * height_ratio;
 
-    canvas.height = window.innerHeight * height_ratio;
-    canvas.width = canvas.height;
+    canvas.height = newHeight;
+    canvas.width = newHeight;
   }
 
   _cubismOption: Option; // Cubism SDK Option

@@ -1,14 +1,38 @@
+/*@font-face {
+    font-family: "mplus";
+    src: url("./assets/fonts/rounded-x-mplus-1c-light.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+} */
 
-:root {
-    --live2d_canvas_height_ratio: 0.69;
-    --background_image_width:1280px;
-}
+@font-face {
+    font-family: "mplus";
+    src: url("./assets/fonts/rounded-x-mplus-1c-bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+} /*
+@font-face {
+    font-family: "mplus";
+    src: url("./assets/fonts/rounded-x-mplus-1c-heavy.ttf") format("truetype");
+    font-weight: 800;
+    font-style: normal;
+} 
+@font-face {
+    font-family: "mplus";
+    src: url("./assets/fonts/rounded-x-mplus-1c-black.ttf") format("truetype");
+    font-weight: 900;
+    font-style: normal;
+} */
 
 html, body {
     background-color: black;
     margin: 0;
     overflow: hidden;
     user-select: none;
+}
+
+:root {
+    --live2d_canvas_height_ratio: 0.69;
 }
 
 #sealview {
@@ -19,29 +43,52 @@ html, body {
     justify-content: center;
 }
 
-#background_image_container {
-    width: 100%;
-    height: 100%;
+.background_container {
     position: relative;
     display: flex;
     justify-content: center;
 }
 
-#background_image_container img {
+.background_container video {
     position: absolute;
-    bottom: 6%;
-    height: 100%;
+    bottom: 0;
+    opacity: 0; /* 始めは背景を表示しない。JSで制御する */
     transition: opacity 4s;
-}
-
-#background_image_day {
-    opacity: 1;
-}
-#background_image_night {
-    opacity: 0;
 }
 
 #live2d_canvas{
     position: absolute;
-    bottom : 12%;
+    bottom : 11.5%;
+    margin-right: 3.75%;
+}
+
+.upper_hukidasi_container {
+    position: absolute;
+    top : 0.5%;
+    width: 40vh;
+    height: 25vh;
+    display: flex;
+    justify-content: center;
+    margin-right: 2%;
+}
+
+.upper_hukidasi_container img {
+    width: 100%;
+    height: 100%;
+}
+
+
+.hukidasi_container_side {
+    position: absolute;
+    top: 0;
+    right: 70%;
+    width: 25vw;
+    height: 80%;
+    display: flex;
+    align-items: center;
+}
+
+.hukidasi_container_side img {
+    width: 100%;
+    height: 20%;
 }

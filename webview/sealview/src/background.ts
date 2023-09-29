@@ -1,18 +1,63 @@
 
-type background_type = "day" | "night";
-let currentBackgroundType : background_type = "day";
+type background_type = "hiru" | "yoru";
+let currentBackgroundType : background_type | null = null;
 
-export function setBackgroundImage(t : background_type){
+const backgroundImageWidth = 1920;
+const backgroundImageHeight = 1080;
+const backgroundAspect = backgroundImageWidth / backgroundImageHeight;
+
+//昼ならtrue夜ならfalseを返す
+function isDaytime() {
+    const now = new Date();
+    const hours = now.getHours();
+
+    const startOfDaytime = 6;
+    const endOfDaytime = 18;
+
+    return hours >= startOfDaytime && hours < endOfDaytime;
+}
+
+function setBackground(t : background_type){
     if(t == currentBackgroundType){
         return;
     }
-    const day = document.getElementById("background_image_day") as HTMLImageElement;
-    const night = document.getElementById("background_image_night") as HTMLImageElement;
+    const hiru = document.getElementById("background_hiru") as HTMLVideoElement;
+    const yoru = document.getElementById("background_yoru") as HTMLVideoElement;
 
-    const current = currentBackgroundType == "day" ? day : night;
-    const next = t == "day" ? day : night;
+    const show = t == "hiru" ? hiru : yoru;
+    const hide = t == "hiru" ? yoru : hiru;
     
-    current.style.opacity = "0";
-    next.style.opacity = "1";
+    hide.style.opacity = "0";
+    hide.pause();
+    show.style.opacity = "1";
+    show.play();
     currentBackgroundType = t;
+}
+
+export function updateBackground(){
+    const t = isDaytime() ? "hiru" : "yoru";
+    setBackground(t);
+}
+
+//背景画像のリサイズ
+export function backgroundOnResize(){
+    const aspect = window.innerWidth / window.innerHeight;
+    const hiru = document.getElementById("background_hiru") as HTMLVideoElement;
+    const yoru = document.getElementById("background_yoru") as HTMLVideoElement;
+    let width, height;
+    if(aspect > backgroundAspect){ 
+        width = window.innerWidth;
+        height = width / backgroundAspect;
+    }
+    else {
+        height = window.innerHeight;
+        width = height * backgroundAspect;
+    }
+    const widthString = width.toString() + "px";
+    const heightString = height.toString() + "px";
+    hiru.style.width = widthString;
+    hiru.style.height = heightString;
+    yoru.style.width = widthString;
+    yoru.style.height = heightString;
+    return { width : width, height : height };
 }

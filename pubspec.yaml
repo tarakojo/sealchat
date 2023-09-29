@@ -120,6 +120,9 @@ flutter:
   assets : 
     - .env
     - assets/sealview/
+    - assets/sealview/assets/
+    - assets/sealview/assets/background/2023syogatsu_Item/
+    - assets/sealview/assets/background/2023syogatsu_Background/
     - assets/sealview/assets/hgkoazarasi/
     - assets/sealview/assets/hgkoazarasi/expressions/
     - assets/sealview/assets/hgkoazarasi/hgkoazarasi.4096/
