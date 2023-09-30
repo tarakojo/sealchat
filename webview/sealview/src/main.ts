@@ -1,7 +1,7 @@
 
 
 import { backgroundOnResize, initBackground } from './background';
-import { hukidasiOnResize, initHukidasi, showHukidasi } from './hukidasi';
+import { dismissHukidasi, hukidasiOnResize, initHukidasi, isHukidasiShown, showHukidasi } from './hukidasi';
 import { LAppDelegate } from './live2d/lappdelegate';
 
 
@@ -23,7 +23,3 @@ window.onresize = () => {
     LAppDelegate.getInstance().onResize(backgroundHeight);
     hukidasiOnResize();
 };
-
-window.onclick = () => {
-  showHukidasi("クリックされたよ");
-}
