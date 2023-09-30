@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import SealView from './components/sealview/SealView';
 import Hukidasi from './components/hukidasi/Hukidasi';
+import Background from './components/background/Background';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         justify-center 
         items-center"
       >
+        <Background />
         <SealView />
         <Hukidasi />
       </div>

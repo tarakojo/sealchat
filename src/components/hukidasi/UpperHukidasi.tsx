@@ -1,6 +1,26 @@
-import { HukidasiProps, commonClasses, textCommonStyles } from './common';
+import { useEffect, useState } from 'react';
+import {
+  HukidasiState,
+  displayHukidasi,
+  getDisplayText,
+  getHukidasiType,
+  hukidasiTextUpdateInterval,
+  textStyles,
+} from './common';
 
-export const UpperHukidasi = (props: HukidasiProps) => {
+export const UpperHukidasi = (props: HukidasiState) => {
+  const [_, dummyUpdate] = useState(0);
+  const forceUpdate = () => {
+    dummyUpdate((x) => x + 1);
+  };
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      forceUpdate();
+    }, hukidasiTextUpdateInterval);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div
       className="
@@ -16,8 +36,8 @@ export const UpperHukidasi = (props: HukidasiProps) => {
         duration-1000
     "
       style={{
-        visibility: props.visibility ? 'visible' : 'hidden',
-        opacity: props.opacity,
+        visibility: getHukidasiType() == 'upper' ? 'visible' : 'hidden',
+        opacity: displayHukidasi(props) ? 1 : 0,
       }}
     >
       <img
@@ -38,11 +58,13 @@ export const UpperHukidasi = (props: HukidasiProps) => {
             flex 
             justify-center
             items-center
-            mb-[5%]
+            mb-[3.5%]
             z-[300]
       "
       >
-        <p style={textCommonStyles}>{props.text}</p>
+        <p style={{ ...textStyles, fontSize: '3.2vh' }}>
+          {getDisplayText(props)}
+        </p>
       </div>
     </div>
   );

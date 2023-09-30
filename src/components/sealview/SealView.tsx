@@ -1,10 +1,12 @@
 import { useEffect, useReducer, useRef, useState } from 'react';
 import { LAppDelegate, canvas } from './live2d/lappdelegate';
+import { getNewBackgroundSize } from '../background/Background';
 
 //表示するべきcanvasのサイズを取得
 const getNewCanvasSize = () => {
   const heightRatio = 0.69;
-  const height = window.innerHeight * heightRatio;
+  const backgroundHeight = getNewBackgroundSize().height;
+  const height = backgroundHeight * heightRatio;
   const width = height;
   return { width, height };
 };
