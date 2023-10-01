@@ -1,6 +1,6 @@
 import { useEffect, useReducer, useRef, useState } from 'react';
 import { LAppDelegate, canvas } from './live2d/lappdelegate';
-import { getNewBackgroundSize } from '../background/Background';
+import { getNewBackgroundSize } from '../Background';
 
 //表示するべきcanvasのサイズを取得
 const getNewCanvasSize = () => {
