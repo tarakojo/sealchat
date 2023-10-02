@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 #環境変数
-.env.production
+.env

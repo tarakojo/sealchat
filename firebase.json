@@ -16,8 +16,7 @@
     }
   ],
   "hosting": {
-    "site": "sealchat",
-    "public": "public",
+    "public": "dist",
     "ignore": [
       "firebase.json",
       "**/.*",
