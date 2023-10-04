@@ -1,6 +1,8 @@
 import { get } from 'http';
 import { useEffect, useRef, useState } from 'react';
 
+const hiruBackgroundPath = './assets/background/2023syogatsu_Background/syougatsu_hiru.mp4';
+const yoruBackgroundPath = './assets/background/2023syogatsu_Background/syougatsu_yoru.mp4';
 const backgroundNaturalWidth = 1920;
 const backgroundNaturalHeight = 1080;
 const backgroundAspect = backgroundNaturalWidth / backgroundNaturalHeight;
@@ -58,18 +60,14 @@ export const Background = () => {
 
   useEffect(() => {
     //動画の初期化
-    hiruRef.current.style.opacity = '0';
     hiruRef.current.muted = true;
     hiruRef.current.autoplay = true;
     hiruRef.current.loop = true;
-    hiruRef.current.src =
-      './assets/background/2023syogatsu_Background/syougatsu_hiru.mp4';
-    yoruRef.current.style.opacity = '0';
+    hiruRef.current.src = hiruBackgroundPath;
     yoruRef.current.muted = true;
     yoruRef.current.autoplay = true;
     yoruRef.current.loop = true;
-    yoruRef.current.src =
-      './assets/background/2023syogatsu_Background/syougatsu_yoru.mp4';
+    yoruRef.current.src = yoruBackgroundPath;
 
     //画面サイズの変更に対応
     const resizeHandler = () => {
@@ -107,25 +105,25 @@ export const Background = () => {
     >
       <video
         className="
-        absolute
+        fixed
         bottom-0
-        opacity-0
         transition-opacity 
         duration-[4s]
         z-[0]
         max-w-none
+        opacity-0
       "
         ref={hiruRef}
       ></video>
       <video
         className="
-          absolute
+          fixed
           bottom-0
-          opacity-0
           transition-opacity
           duration-[4s]
           z-[0]
           max-w-none
+          opacity-0
         "
         ref={yoruRef}
       ></video>

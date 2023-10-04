@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
-import { GoogleAuthProvider, getAuth } from 'firebase/auth';
+import { EmailAuthProvider, GoogleAuthProvider, getAuth } from 'firebase/auth';
+
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
@@ -15,5 +16,16 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+
+//auth関連
 export const auth = getAuth(app);
 export const googleAuthProvider = new GoogleAuthProvider();
+export const emailAuthProvider = new EmailAuthProvider();
+export const firebaseAuthSignedInEvent = 'firebase-auth-signed-in';
+export const firebaseAuthSignedOutEvent = 'firebase-auth-signed-out';
+
+auth.onAuthStateChanged((user) => {
+  // ログイン状態が変わったらイベントを発火
+  console.log("signed in");
+  document.dispatchEvent(new CustomEvent(firebaseAuthSignedInEvent));
+});

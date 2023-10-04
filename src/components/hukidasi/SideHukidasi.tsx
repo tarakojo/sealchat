@@ -8,7 +8,7 @@ import {
   textStyles,
 } from './common';
 
-export const UpperHukidasi = (props: HukidasiState) => {
+export const SideHukidasi = (props: HukidasiState) => {
   const [_, dummyUpdate] = useState(0);
   const forceUpdate = () => {
     dummyUpdate((x) => x + 1);
@@ -24,32 +24,32 @@ export const UpperHukidasi = (props: HukidasiState) => {
   return (
     <div
       className="
-        absolute
-        top-[0.5%]
-        w-[60vh]
-        h-[25vh]
-        mr-[1.5%]
+        fixed
+        bottom-[32%]
+        right-[72%]
+        w-[20vw]
+        h-[22.5vw]
         flex
         justify-center
         items-center
         transition-opacity 
         duration-1000
-    "
+      "
       style={{
-        visibility: getHukidasiType() == 'upper' ? 'visible' : 'hidden',
+        visibility: getHukidasiType() == 'side' ? 'visible' : 'hidden',
         opacity: displayHukidasi(props) ? 1 : 0,
       }}
     >
       <img
-        src="./assets/hukidasi/hukidasi.svg"
+        src="./assets/hukidasi/hukidasi_rotated.svg"
         className="
-            absolute
-            top-0
-            left-0
-            w-full
-            h-full
-            z-[200]
-        "
+              absolute
+              top-0
+              left-0
+              w-full
+              h-full
+              z-[200]
+           "
       />
       <div
         className="
@@ -58,16 +58,14 @@ export const UpperHukidasi = (props: HukidasiState) => {
             flex 
             justify-center
             items-center
-            mb-[3.5%]
+            mr-[5%]
             z-[300]
       "
       >
-        <p style={{ ...textStyles, fontSize: '3.2vh' }}>
-          {getDisplayText(props)}
-        </p>
+        <p style={{...textStyles, fontSize:"1.7vw"}}>{getDisplayText(props)}</p>
       </div>
     </div>
   );
 };
 
-export default UpperHukidasi;
+export default SideHukidasi;

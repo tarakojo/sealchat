@@ -50,7 +50,7 @@ export const SealView = () => {
     <canvas
       ref={canvasRef}
       className="
-        absolute
+        fixed
         bottom-[11.5%]
         mr-[3.5%]  
         transition-opacity
