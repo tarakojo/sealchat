@@ -164,6 +164,7 @@ export class LAppDelegate {
   public run(setOpacity : any): void {
 
     // FPSの計測処理--------------------------
+    let fpsSamplingTimeMS = 5000;
     let tick = Date.now();
     let frames = 0;
 
@@ -171,10 +172,10 @@ export class LAppDelegate {
       const now = Date.now();
       const elapsed = now - tick;
       const fps = frames / (elapsed / 1000);
-      console.log(`${fps}fps`);
+      console.log(`${fps.toFixed(2)} fps`);
       tick = now;
       frames = 0;
-    },1000);
+    },fpsSamplingTimeMS);
     //---------------------------------------
 
     let firstFrame = true;

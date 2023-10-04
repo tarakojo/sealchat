@@ -5,6 +5,7 @@ import { auth, emailAuthProvider, googleAuthProvider } from './firebase';
 import { useRef, useEffect } from 'react';
 import Panels from './components/panels/Panels';
 import Input from './components/Input';
+import Clock from './components/Clock';
 
 function App() {
   const appRef = useRef<HTMLDivElement>(null);
@@ -34,6 +35,7 @@ function App() {
         <Background />
         <SealView />
         <Input />
+        <Clock />
         <Hukidasi />
         <Panels />
       </div>

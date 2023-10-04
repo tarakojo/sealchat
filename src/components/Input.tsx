@@ -41,7 +41,7 @@ const InputBox = () => {
         />
         <button
           type="submit"
-          className="rounded-lg bg-cyan-800 px-3 py-1 text-slate-200 hover:bg-cyan-700"
+          className="rounded-lg bg-cyan-800 px-3 py-1 text-slate-200 overflow-hidden transform transition-transform hover:scale-[105%] active:scale-100"
         >
           <SubmitIcon />
         </button>
@@ -56,11 +56,11 @@ const SubmitIcon = () => {
       xmlns="http://www.w3.org/2000/svg"
       className="h-5 w-5"
       viewBox="0 0 24 24"
-      stroke-width="2"
+      strokeWidth="2"
       stroke="currentColor"
       fill="none"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M10 14l11 -11"></path>

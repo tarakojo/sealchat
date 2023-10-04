@@ -2,16 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @font-face {
   font-family: "mplus";
-  src: url("./fonts/rounded-x-mplus-1c-light.ttf") format("truetype");
+  src: url("./fonts/mplus/rounded-x-mplus-1c-light.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
   font-family: "mplus";
-  src: url("./fonts/rounded-x-mplus-1c-bold.ttf") format("truetype");
+  src: url("./fonts/mplus/rounded-x-mplus-1c-bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
 }
