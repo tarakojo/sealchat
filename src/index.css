@@ -2,30 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: "mplus";
-  src: url("./fonts/mplus/rounded-x-mplus-1c-light.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: "mplus";
-  src: url("./fonts/mplus/rounded-x-mplus-1c-bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-}
 
 :root {
+  user-select : none;
   overflow: hidden;
   background-color: black;
   
-  font-family: "mplus";
+  font-family: '"M PLUS Rounded 1c"';
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-}
-
-div {
-  user-select: none;
 }

@@ -1,4 +1,4 @@
-import { auth, googleAuthProvider } from '../../../../firebase';
+import { auth, googleAuthProvider } from '../../../../../firebase/firebase';
 import StyledFirebaseAuth from './StyledFirebaseAuth';
 
 export const AccountModal = () => {

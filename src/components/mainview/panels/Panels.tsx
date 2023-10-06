@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Modal from './modals/Modal';
 import { Buttons } from './Buttons';
 
-export type PanelKind = 'account' | 'none';
+export type PanelKind = 'account' | 'none' | 'chatHistory';
 
 export const Panels = () => {
   const [panel, setPanel] = useState<PanelKind>('none');

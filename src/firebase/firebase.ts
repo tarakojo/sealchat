@@ -1,6 +1,8 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
+import { getStorage } from 'firebase/storage';
 import { EmailAuthProvider, GoogleAuthProvider, getAuth } from 'firebase/auth';
+import { getFirestore } from "firebase/firestore";
 
 
 const firebaseConfig = {
@@ -17,7 +19,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-//auth関連
+//auth
 export const auth = getAuth(app);
 export const googleAuthProvider = new GoogleAuthProvider();
 export const emailAuthProvider = new EmailAuthProvider();
@@ -29,3 +31,10 @@ auth.onAuthStateChanged((user) => {
   console.log("signed in");
   document.dispatchEvent(new CustomEvent(firebaseAuthSignedInEvent));
 });
+
+//storage
+export const storage = getStorage(app);
+
+
+//firestore
+export const db = getFirestore(app);

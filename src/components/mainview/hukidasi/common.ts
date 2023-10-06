@@ -9,7 +9,7 @@ export type HukidasiState = {
     text : string
 }
 export const textStyles = {
-    fontFamily : "mplus",
+    fontFamily : '"M PLUS Rounded 1c"',
     fontWeight : 700,
 }
 export const getDisplayText = (state : HukidasiState) => {

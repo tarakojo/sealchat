@@ -1,21 +1,23 @@
 import { get } from 'http';
 import { useEffect, useRef, useState } from 'react';
 
-const hiruBackgroundPath = './assets/background/2023syogatsu_Background/syougatsu_hiru.mp4';
-const yoruBackgroundPath = './assets/background/2023syogatsu_Background/syougatsu_yoru.mp4';
+const hiruBackgroundPath =
+  './assets/background/2023syogatsu_Background/syougatsu_hiru.mp4';
+const yoruBackgroundPath =
+  './assets/background/2023syogatsu_Background/syougatsu_yoru.mp4';
 const backgroundNaturalWidth = 1920;
 const backgroundNaturalHeight = 1080;
 const backgroundAspect = backgroundNaturalWidth / backgroundNaturalHeight;
 
-export const getNewBackgroundSize = () => {
-  const aspect = window.innerWidth / window.innerHeight;
+export const getNewBackgroundSize = (container) => {
+  const aspect = container.clientWidth / container.clientHeight;
 
   let width, height;
   if (aspect > backgroundAspect) {
-    width = window.innerWidth;
+    width = container.clientWidth;
     height = width / backgroundAspect;
   } else {
-    height = window.innerHeight;
+    height = container.clientHeight;
     width = height * backgroundAspect;
   }
 
@@ -35,7 +37,7 @@ function getBackgroundType() {
   return hours >= startOfDaytime && hours < endOfDaytime ? 'hiru' : 'yoru';
 }
 
-export const Background = () => {
+export const Background = ({ width, height }) => {
   const hiruRef = useRef<HTMLVideoElement>(null);
   const yoruRef = useRef<HTMLVideoElement>(null);
   const [currentBackground, setCurrentBackground] =
@@ -69,19 +71,6 @@ export const Background = () => {
     yoruRef.current.loop = true;
     yoruRef.current.src = yoruBackgroundPath;
 
-    //画面サイズの変更に対応
-    const resizeHandler = () => {
-      const { width, height } = getNewBackgroundSize();
-      hiruRef.current.style.width = `${width}px`;
-      hiruRef.current.style.height = `${height}px`;
-      yoruRef.current.style.width = `${width}px`;
-      yoruRef.current.style.height = `${height}px`;
-    };
-    window.addEventListener('resize', resizeHandler);
-
-    //サイズの初期化
-    resizeHandler();
-
     //背景の初期化
     updateBackground();
 
@@ -89,8 +78,6 @@ export const Background = () => {
     const updateFunction = setInterval(updateBackground, 1000 * 60);
 
     return () => {
-      //リサイズイベントの削除
-      window.removeEventListener('resize', resizeHandler);
       //背景更新コールバックの削除
       clearInterval(updateFunction);
     };
@@ -104,28 +91,32 @@ export const Background = () => {
       "
     >
       <video
+        ref={hiruRef}
         className="
-        fixed
+        absolute
         bottom-0
-        transition-opacity 
-        duration-[4s]
         z-[0]
         max-w-none
         opacity-0
       "
-        ref={hiruRef}
+        style={{
+          width: width,
+          height: height,
+        }}
       ></video>
       <video
+        ref={yoruRef}
         className="
-          fixed
+          absolute
           bottom-0
-          transition-opacity
-          duration-[4s]
           z-[0]
           max-w-none
           opacity-0
         "
-        ref={yoruRef}
+        style={{
+          width: width,
+          height: height,
+        }}
       ></video>
     </div>
   );

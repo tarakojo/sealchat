@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from 'react';
 
 export const Input = () => {
   return (
-    <div className="fixed bottom-[2.5%] w-[50%] z-[500]">
+    <div className="absolute bottom-[2.5%] w-[50%] z-[500]">
       <InputBox />
     </div>
   );

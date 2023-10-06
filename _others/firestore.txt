@@ -1,0 +1,13 @@
+
+
+データベース設計
+
+users (collections): {
+    <uid> (document) : {
+        numChatHistoryEntries : number
+        chatHistory (collections) : {
+            
+        }
+        
+    }
+}

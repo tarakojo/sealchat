@@ -3,7 +3,7 @@ import {
   auth,
   firebaseAuthSignedInEvent,
   firebaseAuthSignedOutEvent,
-} from '../../firebase';
+} from '../../../firebase/firebase';
 import { PanelKind } from './Panels';
 
 const accountIconPath = 'assets/icons/account_icon.svg';
@@ -23,10 +23,31 @@ export const Buttons = ({ currentPanel, setPanel }) => {
 
   return (
     <div className="absolute right-[10px] bottom-[3%] flex-col z-[10000]">
-      <img title='日記' src={notebookIconPath} className={styles}></img>
-      <img title='会話履歴' src={commentIconPath} className={styles}></img>
-      <img title='あなたについて' src={tagIconPath} className={styles}></img>
-      <img title='設定' src={settingIconPath} className={styles}></img>
+      <img
+        title="日記"
+        src={notebookIconPath}
+        className={styles}
+        draggable={false}
+      ></img>
+      <img
+        title="会話履歴"
+        src={commentIconPath}
+        className={styles}
+        draggable={false}
+        onClick={() => updatePanel('chatHistory')}
+      ></img>
+      <img
+        title="あなたについて"
+        src={tagIconPath}
+        className={styles}
+        draggable={false}
+      ></img>
+      <img
+        title="設定"
+        src={settingIconPath}
+        className={styles}
+        draggable={false}
+      ></img>
 
       <button
         title="アカウント"
@@ -57,12 +78,20 @@ const AccountButtonImage = () => {
   if (auth.currentUser) {
     return (
       <div className="w-[44px] h-[44px] ml-[3px] rounded-full overflow-hidden bg-rgb247-247-247">
-        <img src={auth.currentUser.photoURL} className="w-full h-auto" />
+        <img
+          src={auth.currentUser.photoURL}
+          className="w-full h-auto"
+          draggable={false}
+        />
       </div>
     );
   } else {
     return (
-      <img src={accountIconPath} className="w-[44px] h-[44px] ml-[3px] "></img>
+      <img
+        src={accountIconPath}
+        className="w-[44px] h-[44px] ml-[3px] "
+        draggable={false}
+      ></img>
     );
   }
 };

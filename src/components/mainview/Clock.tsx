@@ -51,7 +51,7 @@ export const Clock = () => {
 
   return (
     <div
-      className="fixed top-[10px] left-[10px] w-[150px] h-[80px] rounded-[20px] bg-slate-100 bg-opacity-50 flex flex-col justify-center items-center"
+      className="absolute top-[10px] left-[10px] w-[150px] h-[80px] rounded-[20px] bg-slate-100 bg-opacity-50 flex flex-col justify-center items-center"
       style={{ fontFamily: 'mplus' }}
     >
       <div className="font-bold text-4xl flex flex-row">

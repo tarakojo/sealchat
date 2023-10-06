@@ -9,7 +9,7 @@ export const Hukidasi = () => {
 
   useEffect(() => {
     window.addEventListener("click", () => {
-      setState({text : "ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ", displayStartTime: Date.now()});
+      setState({text : "abcdef漢字あああああああああああああああああああああああああああああああああああああああああああああ", displayStartTime: Date.now()});
     })
   }, []);
   
