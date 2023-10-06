@@ -26,8 +26,6 @@ export const append = (entry : ChatHistoryEntry) => {
     }
 }
 
-
-
 export const init = () => {
 
 }

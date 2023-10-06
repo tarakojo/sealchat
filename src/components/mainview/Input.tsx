@@ -1,4 +1,7 @@
+import { httpsCallable } from 'firebase/functions';
 import { useRef, useEffect, useState } from 'react';
+import { functions } from '../../firebase/firebase';
+import { showHukidasi } from './hukidasi/Hukidasi';
 
 export const Input = () => {
   return (
@@ -13,17 +16,31 @@ const InputBox = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    const onSubmited = (e) => {
+    const onSubmited = async (e) => {
       //submitされたときの処理
       e.preventDefault();
 
-      console.log(inputRef.current.value);
+      const message = inputRef.current.value;
+
+      //入力を空にする
       inputRef.current.value = '';
 
-      /*
-          送信処理をかく
-        */
+      console.log(`send message: ${message}`);
+
+      //入力を送信
+      const result = await httpsCallable<any, any>(
+        functions,
+        'seal_response'
+      )({ message: message });
+
+      console.log('result');
+      console.log(result.data);
+
+      //返答を吹き出しで表示
+      showHukidasi(result.data.message);
     };
+
+    //submitイベントを登録
     formRef.current.addEventListener('submit', onSubmited);
     return () => {
       formRef.current.removeEventListener('submit', onSubmited);

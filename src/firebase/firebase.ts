@@ -1,8 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
-import { getStorage } from 'firebase/storage';
-import { EmailAuthProvider, GoogleAuthProvider, getAuth } from 'firebase/auth';
-import { getFirestore } from "firebase/firestore";
+import { EmailAuthProvider, GoogleAuthProvider, connectAuthEmulator, getAuth } from 'firebase/auth';
+import { connectFunctionsEmulator, getFunctions } from "firebase/functions";
 
 
 const firebaseConfig = {
@@ -17,6 +16,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
 const analytics = getAnalytics(app);
 
 //auth
@@ -32,9 +32,10 @@ auth.onAuthStateChanged((user) => {
   document.dispatchEvent(new CustomEvent(firebaseAuthSignedInEvent));
 });
 
-//storage
-export const storage = getStorage(app);
 
-
-//firestore
-export const db = getFirestore(app);
+//functions
+export const functions = getFunctions(app, "asia-northeast1");
+if(import.meta.env.VITE_FIREBASE_EMULATORS == "true"){
+  console.log("connect to firebase functions emulator");
+  connectFunctionsEmulator(functions, "127.0.0.1", 5001);
+}
