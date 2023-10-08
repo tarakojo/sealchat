@@ -4,10 +4,28 @@
 
 users (collections): {
     <uid> (document) : {
-        numChatHistoryEntries : number
-        chatHistory (collections) : {
-            
-        }
         
+        chatHistory (collections) : {
+            <timestamp> : {
+                text : string 
+                timestamp : datetime
+                attribute : string 
+            }
+        }
+
+        calendar : (collections) : {
+            <date> : {
+                date : date 
+                entries : string [] 
+            }
+        }   
+
+        aboutYou (map): {
+            nickname : string
+            profile : string 
+            scretProfile : string 
+            recentTopics : string [] 
+            lastUpdate : datetime
+        }
     }
 }
