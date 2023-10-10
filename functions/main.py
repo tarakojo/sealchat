@@ -10,10 +10,26 @@ from firebase_admin import firestore
 initialize_app() 
 db = firestore.client()
 
-import chat
+import chat.chat as chat
 import database.database as database 
 
 REGION = "asia-northeast1"
+
+@https_fn.on_call(region=REGION)
+def get_aboutyou(req: https_fn.Request):
+    return database.get_aboutyou(db, req.auth.uid).to_dict()
+
+@https_fn.on_call(region=REGION)
+def update_aboutyou(req: https_fn.Request):
+    database.update_aboutyou(db, req.auth.uid, database.AboutYou.from_dict(req.data["aboutyou"]))
+
+@https_fn.on_call(region=REGION)
+def get_chat_history(req: https_fn.Request):
+    return database.get_chat_history(db, req.auth.uid)
+
+@https_fn.on_call(region=REGION)
+def get_calendar(req: https_fn.Request):
+    return database.get_calendar(db, req.auth.uid, req.data["startUnixTime"], req.data["endUnixTime"])
 
 @https_fn.on_call(region=REGION)
 def seal_response(req: https_fn.Request):
@@ -22,3 +38,4 @@ def seal_response(req: https_fn.Request):
     return {
         "message": chat_response
     }
+

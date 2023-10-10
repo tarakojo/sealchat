@@ -1,5 +1,9 @@
+import os 
+
+import datetime
 from database.types import *
-from firebase_admin import firestore
+from firebase_admin import firestore 
+from firebase_admin.firestore import FieldFilter
 
 
 CHAT_HISTORY_MAX_INDEX = 200
@@ -57,4 +61,16 @@ def get_chat_history(db, uid) :
     chat_history_data = chat_history_ref.get()
     return [ChatHistoryEntry.from_dict(entry) for entry in chat_history_data]
 
+def get_calendar(db, uid, startUnixTime, endUnixTime):
+    calendar_ref = get_calendar_ref(db, uid)
+    calendar_data = calendar_ref.where(filter=FieldFilter("dateUnixTime", ">=", startUnixTime)).where(filter=FieldFilter("dateUnixTime", "<=", endUnixTime)).get()
+    return [CalendarEntry.from_dict(entry) for entry in calendar_data]
+
+def unixtime_to_calendar_doc_name(unixtime) :
+    res= datetime.datetime.fromtimestamp(unixtime)
+    return f'{res.year}-{res.month}-{res.day}'
+
+def set_caendar(db, uid, entry):
+    calendar_ref = get_calendar_ref(db, uid)
+    calendar_ref.document(unixtime_to_calendar_doc_name(entry.dateUnixTime)).set(entry.to_dict())
 

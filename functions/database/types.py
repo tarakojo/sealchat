@@ -22,20 +22,20 @@ class ChatHistoryEntry:
         }
 
 class CalendarEntry:
-    def __init__(self, date, contents):
-        self.date = date
+    def __init__(self, dateUnixTime, contents):
+        self.dateUnixTime = dateUnixTime
         self.contents = contents
 
     @staticmethod
     def from_dict(source):
         return CalendarEntry(
-            source['date'],
+            source['dateUnixTime'],
             source['contents']
         )
 
     def to_dict(self):
         return {
-            'date': self.date,
+            'dateUnixTime': self.dateUnixTime,
             'contents': self.contents
         }
 

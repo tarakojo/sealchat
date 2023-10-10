@@ -15,7 +15,7 @@ users (collections): {
 
         calendar : (collections) : {
             <date> : {
-                date : date 
+                dateUnixTime : date 
                 entries : string [] 
             }
         }   
