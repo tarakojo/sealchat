@@ -30,14 +30,13 @@ const InputBox = () => {
       //入力を送信
       const result = await httpsCallable<any, any>(
         functions,
-        'seal_response'
+        'chat_with_message'
       )({ message: message });
 
-      console.log('result');
       console.log(result.data);
 
       //返答を吹き出しで表示
-      showHukidasi(result.data.message);
+      showHukidasi(result.data);
     };
 
     //submitイベントを登録

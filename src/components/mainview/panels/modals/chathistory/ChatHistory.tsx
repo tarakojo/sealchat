@@ -37,6 +37,7 @@ const YourComment = (props: { text: string }) => {
 };
 
 const ChatHistoryDetail = () => {
+
   return (
     <div
       className="

@@ -4,11 +4,14 @@
 
 users (collections): {
     <uid> (document) : {
-        
+        nickname : string
+        profile : string 
+
         chatHistory (collections) : {
             <timestamp> : {
-                text : string 
+                message : string 
                 timestamp : datetime
+                role : "user" | "goma" 
                 attribute : string 
             }
         }
@@ -16,16 +19,9 @@ users (collections): {
         calendar : (collections) : {
             <date> : {
                 dateUnixTime : date 
-                entries : string [] 
+                entry : string 
             }
         }   
-
-        aboutYou (map): {
-            nickname : string
-            profile : string 
-            scretProfile : string 
-            recentTopics : string [] 
-            lastUpdate : datetime
-        }
+        
     }
 }
