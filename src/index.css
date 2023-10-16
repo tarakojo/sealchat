@@ -8,9 +8,29 @@
   overflow: hidden;
   background-color: black;
   
-  font-family: '"M PLUS Rounded 1c"';
+  font-family: 'Roboto' '"M PLUS Rounded 1c"';
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
+
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #dedede;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c6c6c6;
+  border-radius: 8px;
+}
+
+* {
+  scrollbar-color: #dedede #c6c6c6;
+  scrollbar-width: thin;
 }

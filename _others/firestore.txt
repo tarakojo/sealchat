@@ -4,9 +4,12 @@
 
 users (collections): {
     <uid> (document) : {
-        nickname : string
-        profile : string 
-
+        info : {
+            nickname : string
+            profile : string 
+            notificationEmailAddress : string 
+        }
+        
         chatHistory (collections) : {
             <timestamp> : {
                 message : string 
@@ -19,7 +22,7 @@ users (collections): {
         calendar : (collections) : {
             <date> : {
                 dateUnixTime : date 
-                entry : string 
+                content : string 
             }
         }   
         

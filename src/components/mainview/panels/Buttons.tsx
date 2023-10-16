@@ -47,6 +47,7 @@ export const Buttons = ({ currentPanel, setPanel }) => {
         src={settingIconPath}
         className={styles}
         draggable={false}
+        onClick={() => updatePanel('settings')}
       ></img>
 
       <button

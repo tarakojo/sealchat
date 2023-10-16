@@ -31,7 +31,7 @@ const InputBox = () => {
       const result = await httpsCallable<any, any>(
         functions,
         'chat_with_message'
-      )({ message: message });
+      )({ message: message, currentUnixTime: Date.now() });
 
       console.log(result.data);
 

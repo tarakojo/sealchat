@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { EmailAuthProvider, GoogleAuthProvider, connectAuthEmulator, getAuth } from 'firebase/auth';
-import { connectFunctionsEmulator, getFunctions } from "firebase/functions";
+import { connectFunctionsEmulator, getFunctions, httpsCallable } from "firebase/functions";
 
 
 const firebaseConfig = {
@@ -30,6 +30,17 @@ auth.onAuthStateChanged((user) => {
   // ログイン状態が変わったらイベントを発火
   console.log("signed in");
   document.dispatchEvent(new CustomEvent(firebaseAuthSignedInEvent));
+
+  console.log("init user");
+  // ユーザーがログインしたら、バックエンドの初期化
+  httpsCallable(functions, "init_user")(
+    { info : { 
+        nickname : user?.displayName ?? "", 
+        notificationEmailAddress : user?.email ?? "", 
+        profile : "" 
+      }
+    }
+  );
 });
 
 

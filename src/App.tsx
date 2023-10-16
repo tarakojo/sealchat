@@ -5,6 +5,19 @@ import {
   googleAuthProvider,
 } from './firebase/firebase';
 import { useRef, useEffect } from 'react';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+
+/* MUIの設定 -------------- */
+export const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#155E75',
+      contrastText: '#ffffff',
+    },
+  },
+});
+/* ----------------------- */
 
 function App() {
   const appRef = useRef<HTMLDivElement>(null);
@@ -19,7 +32,10 @@ function App() {
         ref={appRef}
         className="w-screen h-screen flex opacity-0 transition-opacity duration-[4s]"
       >
-        <MainView />
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <MainView />
+        </ThemeProvider>
       </div>
     </>
   );

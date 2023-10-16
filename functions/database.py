@@ -11,30 +11,21 @@ CHAT_HISTORY_MAX_INDEX = 200
 def get_user_ref(db, uid) : 
     return db.collection("users").document(uid)
 
-def init_user_doc(db, uid, nickname) :
+
+def get_info(db, uid) :
+    return get_user_ref(db, uid).get().to_dict()["info"]
+
+def set_info(db, uid, info) :
+    get_user_ref(db, uid).set({
+        "info" : info
+    })
+
+def init_user(db, uid, info) :
     user_ref = get_user_ref(db, uid)
     if user_ref.get().exists :
         return
-    user_ref.set({
-        "nickname" : nickname,
-        "profile" : "",
-    })
-    
-def get_user_nickname (db, uid) : 
-    return get_user_ref(db, uid).get().to_dict()["nickname"]
-
-def set_user_nickname (db, uid, nickname) :
-    get_user_ref(db, uid).set({
-        "nickname" : nickname
-    })
-
-def get_user_profile (db, uid) :
-    return get_user_ref(db, uid).get().to_dict()["profile"]
-
-def set_user_profile (db, uid, profile) :
-    get_user_ref(db, uid).set({
-        "profile" : profile
-    })
+    else : 
+        set_info(db, uid, info)
 
 #チャット履歴の参照を取得
 def get_chat_hostory_ref(db, uid) :
@@ -76,3 +67,11 @@ def get_calendar(db, uid, startUnixTime, endUnixTime):
     calendar_ref = get_calendar_ref(db, uid)
     calendar_data = calendar_ref.where(filter=FieldFilter("dateUnixTime", ">=", startUnixTime)).where(filter=FieldFilter("dateUnixTime", "<=", endUnixTime)).get()
     return [entry.to_dict()  for entry in calendar_data]
+
+def get_recent_calendar(db, uid, n):
+    calendar_ref = get_calendar_ref(db, uid)
+    calendar_data = calendar_ref.order_by("dateUnixTime", direction=firestore.Query.DESCENDING).limit(n).get()
+    
+    res = [entry.to_dict()  for entry in calendar_data]
+    res.reverse()    
+    return res 
