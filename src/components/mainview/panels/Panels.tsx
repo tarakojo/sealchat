@@ -4,13 +4,27 @@ import { Buttons } from './Buttons';
 
 export type PanelKind = 'account' | 'none' | 'chatHistory' | 'settings';
 
+export const setPanel = (panel: PanelKind) => {
+  document.dispatchEvent(new CustomEvent('setPanel', { detail: panel }));
+};
+
 export const Panels = () => {
-  const [panel, setPanel] = useState<PanelKind>('none');
+  const [panelKind, setPanelKind] = useState<PanelKind>('none');
+
+  useEffect(() => {
+    const setPanelListener = (e: CustomEvent<PanelKind>) => {
+      setPanelKind(e.detail);
+    };
+    document.addEventListener('setPanel', setPanelListener);
+    return () => {
+      document.removeEventListener('setPanel', setPanelListener);
+    };
+  }, []);
 
   return (
     <>
-      <Modal currentPanel={panel} setPanel={setPanel} />
-      <Buttons currentPanel={panel} setPanel={setPanel} />
+      <Modal currentPanel={panelKind} setPanel={(x) => setPanelKind(x)} />
+      <Buttons currentPanel={panelKind} setPanel={(x) => setPanelKind(x)} />
     </>
   );
 };

@@ -3,6 +3,7 @@ import { auth, functions } from '../../../../../firebase/firebase';
 import { httpsCallable } from 'firebase/functions';
 import Modal from '../Modal';
 import ModalContainer from '../ModalContainer';
+import { CircularProgress } from '@mui/material';
 
 const MyComment = (props: { text: string }) => {
   return (
@@ -37,8 +38,16 @@ type chatHistoryEntry = {
   isMyMessage: boolean;
 };
 
-export const ChatHistory = (setPanel) => {
-  const [chatHistory, setChatHistory] = useState<chatHistoryEntry[]>([]);
+type ChatHistoryState = {
+  entries: chatHistoryEntry[];
+  loading: boolean;
+};
+
+export const ChatHistory = () => {
+  const [chatHistoryState, setChatHistoryState] = useState<ChatHistoryState>({
+    entries: [],
+    loading: true,
+  });
 
   useEffect(() => {
     httpsCallable(functions, 'get_chat_history')().then((result) => {
@@ -50,11 +59,14 @@ export const ChatHistory = (setPanel) => {
         };
       });
 
-      setChatHistory(data);
+      setChatHistoryState({
+        entries: data,
+        loading: false,
+      });
     });
   }, []);
 
-  const entries = chatHistory.map((entry) => {
+  const entries = chatHistoryState.entries.map((entry) => {
     if (entry.isMyMessage) {
       return <MyComment text={entry.message} />;
     } else {
@@ -62,10 +74,17 @@ export const ChatHistory = (setPanel) => {
     }
   });
 
+  const body = chatHistoryState.loading ? (
+    <div className="flex justify-center items-center">
+      <CircularProgress />{' '}
+    </div>
+  ) : (
+    <div className="flex-grow overflow-y-auto">{entries}</div>
+  );
   return (
-    <ModalContainer setPanel={setPanel} top="5%" width="500px" height="70%">
+    <ModalContainer top="5%" width="500px" height="70%">
       <p className="text-2xl">チャット履歴</p>
-      <div className="flex-grow overflow-y-auto">{entries}</div>
+      {body}
     </ModalContainer>
   );
 };

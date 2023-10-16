@@ -1,8 +1,9 @@
+import { PanelKind, setPanel } from "../Panels";
+
 export type ModalContainerProps = {
   top: string;
   width: string;
   height: string;
-  setPanel : any;
   children: React.ReactNode;
 };
 
@@ -19,7 +20,7 @@ export const ModalContainer = (props: ModalContainerProps) => {
                 h-screen
                 z-[1000]
             "
-      onClick={() => props.setPanel('none')}
+      onClick={() => setPanel('none')}
     >
       <div
         className="absolute rounded-[15px] overflow-hidden z-[2000]"

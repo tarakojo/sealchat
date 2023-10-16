@@ -16,7 +16,7 @@ type State = {
   currentState: SettingsState;
 };
 
-export const Settings = (setPanel) => {
+export const Settings = () => {
   const [settingsState, setSettingsState] = useState<State>({
     nickname: '',
     email: '',
@@ -71,7 +71,7 @@ export const Settings = (setPanel) => {
   };
 
   return (
-    <ModalContainer setPanel={setPanel} top="5%" width="300px" height="80%">
+    <ModalContainer top="5%" width="300px" height="80%">
       <p className="text-2xl">設定</p>
       <div className="flex-grow flex flex-col justify-end">
         <div className="flex-grow flex flex-col">
@@ -137,7 +137,7 @@ export const Settings = (setPanel) => {
             disabled={settingsState.currentState !== 'default'}
           >
             {settingsState.currentState === 'sending' ? (
-              <CircularProgress />
+              <CircularProgress size={16}/>
             ) : (
               '保存'
             )}

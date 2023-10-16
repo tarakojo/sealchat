@@ -2,15 +2,19 @@ import { useEffect, useState } from 'react';
 import AccountModal from './account/AccountModal';
 import { ChatHistory } from './chathistory/ChatHistory';
 import Settings from './settings/Settings';
+import { PanelKind } from '../Panels';
 
-export const Modal = ({ currentPanel, setPanel }) => {
-  switch (currentPanel) {
+export const Modal = (props: {
+  currentPanel: PanelKind;
+  setPanel: (PanelKind) => void;
+}) => {
+  switch (props.currentPanel) {
     case 'account':
-      return <AccountModal setPanel={setPanel} />;
+      return <AccountModal />;
     case 'settings':
-      return <Settings setPanel={setPanel} />;
+      return <Settings />;
     case 'chatHistory':
-      return <ChatHistory setPanel={setPanel} />;
+      return <ChatHistory />;
     default:
       return null;
   }

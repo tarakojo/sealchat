@@ -2,6 +2,7 @@ import { httpsCallable } from 'firebase/functions';
 import { useRef, useEffect, useState } from 'react';
 import { functions } from '../../firebase/firebase';
 import { showHukidasi } from './hukidasi/Hukidasi';
+import { CircularProgress } from '@mui/material';
 
 export const Input = () => {
   return (
@@ -15,15 +16,18 @@ const InputBox = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const [submitting, setSubmitting] = useState<boolean>(false);
+
   useEffect(() => {
     const onSubmited = async (e) => {
       //submitされたときの処理
       e.preventDefault();
 
+      if (submitting) return;
+
       const message = inputRef.current.value;
 
-      //入力を空にする
-      inputRef.current.value = '';
+      setSubmitting(true);
 
       console.log(`send message: ${message}`);
 
@@ -37,6 +41,11 @@ const InputBox = () => {
 
       //返答を吹き出しで表示
       showHukidasi(result.data);
+
+      //入力を空にする
+      inputRef.current.value = '';
+
+      setSubmitting(false);
     };
 
     //submitイベントを登録
@@ -59,7 +68,7 @@ const InputBox = () => {
           type="submit"
           className="rounded-lg bg-cyan-800 px-3 py-1 text-slate-200 overflow-hidden transform transition-transform hover:scale-[105%] active:scale-100"
         >
-          <SubmitIcon />
+          {submitting ? <CircularProgress color='secondary' size={24}/> : <SubmitIcon />}
         </button>
       </div>
     </form>

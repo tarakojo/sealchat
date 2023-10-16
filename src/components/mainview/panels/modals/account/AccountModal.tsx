@@ -1,14 +1,13 @@
 import { auth, googleAuthProvider } from '../../../../../firebase/firebase';
+import { setPanel } from '../../Panels';
 import ModalContainer from '../ModalContainer';
 import StyledFirebaseAuth from './StyledFirebaseAuth';
 
-export const AccountModal = (setPanel) => {
+export const AccountModal = () => {
   return (
-    <ModalContainer setPanel={setPanel} top="30%" width="400px" height="200px">
+    <ModalContainer top="30%" width="400px" height="200px">
       <div className="flex flex-row justify-center">
-        <p className="text-2xl">
-          別のアカウントでログインする
-        </p>
+        <p className="text-2xl">別のアカウントでログインする</p>
       </div>
       <div className="flex flex-col justify-center items-center">
         <StyledFirebaseAuth
@@ -17,7 +16,10 @@ export const AccountModal = (setPanel) => {
             signInFlow: 'popup',
             signInOptions: [googleAuthProvider.providerId],
             callbacks: {
-              signInSuccessWithAuthResult: () => false,
+              signInSuccessWithAuthResult: () => {
+                setPanel('none');
+                return false;
+              },
             },
           }}
         />

@@ -7,7 +7,7 @@ import database as database
 import common as common
 
 
-def chat_prompt(current_time, nickname, calendar, chat_history): 
+def chat_prompt(current_time, nickname, profile, calendar, chat_history): 
     return "".join([
 f'現在の日時は{common.get_time_str(time.time())}です。\n' ,
 """あなたは、ごまの役になって、以下の会話に続くごまの台詞を1つだけ書いてください。
@@ -31,6 +31,12 @@ f'なお、{nickname}の最近あった出来事は、以下の通りです。\n
 common.get_calendar_str(calendar),
 """(以上)
 
+""",
+f'また、{nickname}について、以下の情報があります。',
+profile,
+"""
+(以上)
+
 出力は、ごまの台詞一行のみを出力してください。
 他の出力は絶対にしないでください。
 
@@ -51,13 +57,15 @@ def chat_with_input(db, uid, current_unix_time, input_message) :
         "attribute" : ""
     }
 
-    nickname = database.get_nickname(db, uid)
+    info = database.get_info(db, uid)
+    nickname = info["nickname"]
+    profile = info["profile"]
     calendar = common.get_recent_calendar(db, uid)
     chat_history = database.get_chat_history(db, uid)
 
     chat_history.append(input_entry)
 
-    prompt = chat_prompt(current_unix_time, nickname, calendar, chat_history)
+    prompt = chat_prompt(current_unix_time, nickname, profile, calendar, chat_history)
     print("Chat prompt: " + prompt)
 
     response = openai.Completion.create(
