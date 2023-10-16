@@ -7,7 +7,7 @@ const yoruBackgroundPath =
   './assets/background/2023syogatsu_Background/syougatsu_yoru.mp4';
 const backgroundNaturalWidth = 1920;
 const backgroundNaturalHeight = 1080;
-const backgroundAspect = backgroundNaturalWidth / backgroundNaturalHeight;
+export const backgroundAspect = backgroundNaturalWidth / backgroundNaturalHeight;
 
 export const getNewBackgroundSize = (container) => {
   const aspect = container.clientWidth / container.clientHeight;
