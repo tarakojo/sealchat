@@ -3,6 +3,7 @@ import AccountModal from './account/AccountModal';
 import { ChatHistory } from './chathistory/ChatHistory';
 import Settings from './settings/Settings';
 import { PanelKind } from '../Panels';
+import { Calendar } from './calendar/Calendar';
 
 export const Modal = (props: {
   currentPanel: PanelKind;
@@ -13,6 +14,8 @@ export const Modal = (props: {
       return <AccountModal />;
     case 'settings':
       return <Settings />;
+    case 'calendar':
+      return <Calendar />;
     case 'chatHistory':
       return <ChatHistory />;
     default:

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Modal from './modals/Modal';
 import { Buttons } from './Buttons';
 
-export type PanelKind = 'account' | 'none' | 'chatHistory' | 'settings';
+export type PanelKind = 'account' | 'none' | 'chatHistory' | 'settings' | 'calendar';
 
 export const setPanel = (panel: PanelKind) => {
   document.dispatchEvent(new CustomEvent('setPanel', { detail: panel }));

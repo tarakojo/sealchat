@@ -24,10 +24,11 @@ export const Buttons = ({ currentPanel, setPanel }) => {
   return (
     <div className="absolute right-[10px] bottom-[3%] flex-col z-[10000]">
       <img
-        title="日記"
+        title="日々の記録"
         src={notebookIconPath}
         className={styles}
         draggable={false}
+        onClick={() => updatePanel('calendar')}
       ></img>
       <img
         title="会話履歴"
@@ -37,16 +38,9 @@ export const Buttons = ({ currentPanel, setPanel }) => {
         onClick={() => updatePanel('chatHistory')}
       ></img>
       <img
-        title="あなたについて"
+        title="あなたについての設定"
         src={tagIconPath}
         className={styles}
-        draggable={false}
-      ></img>
-      <img
-        title="設定"
-        src={settingIconPath}
-        className={styles}
-        draggable={false}
         onClick={() => updatePanel('settings')}
       ></img>
 
