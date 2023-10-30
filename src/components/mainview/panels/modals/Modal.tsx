@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import AccountModal from './account/AccountModal';
-import { ChatHistory } from './chathistory/ChatHistory';
-import Settings from './settings/Settings';
+import AccountModal from './Account';
+import { ChatHistory } from './ChatHistory';
+import Settings from './Settings';
 import { PanelKind } from '../Panels';
-import { Calendar } from './calendar/Calendar';
+import { Calendar } from './Calendar';
+import Wellcome from './Welcome';
 
 export const Modal = (props: {
   currentPanel: PanelKind;
@@ -18,6 +19,8 @@ export const Modal = (props: {
       return <Calendar />;
     case 'chatHistory':
       return <ChatHistory />;
+    case 'wellcome':
+      return <Wellcome />;
     default:
       return null;
   }

@@ -5,7 +5,7 @@ import Input from './Input';
 import Clock from './Clock';
 import { useEffect, useRef, useState } from 'react';
 import Panels from './panels/Panels';
-import MessageBoard from './messageboard/MessageBoard';
+import MessageBoard from './MessageBoard';
 
 export const MainView = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -49,7 +49,7 @@ export const MainView = () => {
 
   return (
     <>
-      <div ref={containerRef} className='h-full w-full flex justify-center'>
+      <div ref={containerRef} className="h-full w-full flex justify-center">
         {background}
         {sealView}
         <Input />

@@ -16,10 +16,6 @@ def get_time_str(unixtime) :
     date_time = datetime.datetime.fromtimestamp(unixtime)
     return date_time.strftime("%Y/%m/%d %H:%M")
 
-def get_date_str(unixtime) :
-    date_time = datetime.datetime.fromtimestamp(unixtime)
-    return date_time.strftime("%Y/%m/%d")
-
 #分単位での経過時間を返す
 def elapsed_minutes(current, timestamp) :
     return (current - timestamp) / 60
@@ -43,4 +39,4 @@ def get_recent_calendar(db, uid) :
 
 #calendarを文字列に変換する
 def get_calendar_str(calendar) :
-    return "".join([f'{get_date_str(entry["dateUnixTime"])} : {entry["content"]}\n' for entry in calendar])
+    return "".join([f'{entry["date"]} : {entry["content"]}\n' for entry in calendar])

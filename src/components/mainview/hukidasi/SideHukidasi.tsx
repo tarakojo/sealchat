@@ -59,7 +59,7 @@ export const SideHukidasi = (props: HukidasiState) => {
             justify-center
             items-center
             mr-[5%]
-            z-[300]
+            z-[30000]
       "
       >
         <p style={{...textStyles, fontSize:"1.7vw"}}>{getDisplayText(props)}</p>

@@ -2,6 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { EmailAuthProvider, GoogleAuthProvider, connectAuthEmulator, getAuth } from 'firebase/auth';
 import { connectFunctionsEmulator, getFunctions, httpsCallable } from "firebase/functions";
+import { setPanel } from '../components/mainview/panels/Panels';
 
 
 const firebaseConfig = {
@@ -23,14 +24,19 @@ const analytics = getAnalytics(app);
 export const auth = getAuth(app);
 export const googleAuthProvider = new GoogleAuthProvider();
 export const emailAuthProvider = new EmailAuthProvider();
-export const firebaseAuthSignedInEvent = 'firebase-auth-signed-in';
-export const firebaseAuthSignedOutEvent = 'firebase-auth-signed-out';
+export const firebaseAuthStateChangedEvent = 'firebase-auth-state-changed';
+
 
 auth.onAuthStateChanged((user) => {
+  document.dispatchEvent(new CustomEvent(firebaseAuthStateChangedEvent));
+  if(user == null){
+    return ;
+  }
+
   // ログイン状態が変わったらイベントを発火
   console.log("signed in");
-  document.dispatchEvent(new CustomEvent(firebaseAuthSignedInEvent));
-
+  setPanel("none");
+  
   console.log("init user");
   // ユーザーがログインしたら、バックエンドの初期化
   httpsCallable(functions, "init_user")(

@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { backgroundAspect } from '../Background';
+import { backgroundAspect } from './Background';
 import { Button, CircularProgress, TextareaAutosize } from '@mui/material';
-import CustomTextField, {
-  CustomTextFieldCurrentState,
-} from '../../../utils/CustomTextField';
+import { httpsCallable } from 'firebase/functions';
+import {
+  auth,
+  firebaseAuthStateChangedEvent,
+  functions,
+} from '../../firebase/firebase';
+import { getDateString } from '../../utils/date';
+import { showHukidasi } from './hukidasi/Hukidasi';
 
 const maxLength = 500;
 
@@ -36,12 +41,53 @@ const getMessageBoardSize = () => {
 
 export const MessageBoard = () => {
   const [messageBoardState, setMessageBoardState] = useState<MessageBoardState>(
-    { ...getMessageBoardSize(), content: '', currentState: 'default' }
+    { ...getMessageBoardSize(), content: '', currentState: 'loading' }
   );
 
   const textAreaRef = React.useRef<HTMLTextAreaElement>(null);
-    
+
   useEffect(() => {
+    const authStateChangeHandler = (user: any) => {
+      textAreaRef.current.value = '';
+      setMessageBoardState((prev) => {
+        return {
+          ...prev,
+          currentState: 'loading',
+          content: '',
+        };
+      });
+
+      if (user == null) {
+        return;
+      }
+
+      httpsCallable<any, any>(
+        functions,
+        'get_calendar'
+      )({ date: getDateString() }).then((result) => {
+        const res = result.data as any[];
+        const content = res.length > 0 ? res[0].content : '';
+
+        console.log('diary content: ' + content);
+
+        textAreaRef.current.value = content;
+        setMessageBoardState((prev) => {
+          return {
+            ...prev,
+            content: content,
+            currentState: 'default',
+          };
+        });
+      });
+    };
+
+    authStateChangeHandler(auth.currentUser);
+
+    document.addEventListener(
+      firebaseAuthStateChangedEvent,
+      authStateChangeHandler
+    );
+
     const resizeHandler = () => {
       setMessageBoardState((prev) => {
         return { ...prev, ...getMessageBoardSize() };
@@ -50,6 +96,10 @@ export const MessageBoard = () => {
     window.addEventListener('resize', resizeHandler);
     return () => {
       window.removeEventListener('resize', resizeHandler);
+      document.removeEventListener(
+        firebaseAuthStateChangedEvent,
+        authStateChangeHandler
+      );
     };
   }, []);
 
@@ -66,8 +116,32 @@ export const MessageBoard = () => {
   };
 
   const onButtonClick = async () => {
+    setMessageBoardState((prev) => {
+      return {
+        ...prev,
+        currentState: 'sending',
+      };
+    });
 
-  }
+    await httpsCallable<any, any>(
+      functions,
+      'set_calendar'
+    )({ entry: { date: getDateString(), content: messageBoardState.content } });
+
+    setMessageBoardState((prev) => {
+      return {
+        ...prev,
+        currentState: 'default',
+      };
+    });
+
+    const result = await httpsCallable<any, any>(
+      functions,
+      'comment'
+    )({ currentUnixTime: Date.now() });
+    
+    showHukidasi(result.data);
+  };
 
   return (
     <div

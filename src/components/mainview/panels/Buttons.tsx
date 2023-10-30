@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import {
   auth,
-  firebaseAuthSignedInEvent,
-  firebaseAuthSignedOutEvent,
+  firebaseAuthStateChangedEvent,
 } from '../../../firebase/firebase';
 import { PanelKind } from './Panels';
 
@@ -22,7 +21,7 @@ export const Buttons = ({ currentPanel, setPanel }) => {
     'w-[50px] h-[50px] pt-[5px] overflow-hidden transform transition-transform hover:scale-[105%] active:scale-95';
 
   return (
-    <div className="absolute right-[10px] bottom-[3%] flex-col z-[10000]">
+    <div className="absolute right-[10px] bottom-[3%] flex-col z-[1500]">
       <img
         title="日々の記録"
         src={notebookIconPath}
@@ -61,12 +60,10 @@ const AccountButtonImage = () => {
 
   useEffect(() => {
     //コールバック関数を登録
-    document.addEventListener(firebaseAuthSignedInEvent, forceUpdate);
-    document.addEventListener(firebaseAuthSignedOutEvent, forceUpdate);
+    document.addEventListener(firebaseAuthStateChangedEvent, forceUpdate);
     return () => {
       //コールバック関数を削除
-      document.removeEventListener(firebaseAuthSignedInEvent, forceUpdate);
-      document.removeEventListener(firebaseAuthSignedOutEvent, forceUpdate);
+      document.removeEventListener(firebaseAuthStateChangedEvent, forceUpdate);
     };
   }, []);
 

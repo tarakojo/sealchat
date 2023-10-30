@@ -59,7 +59,7 @@ export const UpperHukidasi = (props: HukidasiState) => {
             justify-center
             items-center
             mb-[3.5%]
-            z-[300]
+            z-[30000]
       "
       >
         <p style={{ ...textStyles, fontSize: '3.2vh' }}>

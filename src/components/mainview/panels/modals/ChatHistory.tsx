@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { auth, functions } from '../../../../../firebase/firebase';
+import { auth, functions } from '../../../../firebase/firebase';
 import { httpsCallable } from 'firebase/functions';
-import Modal from '../Modal';
-import ModalContainer from '../ModalContainer';
+import Modal from './Modal';
+import ModalContainer from './ModalContainer';
 import { CircularProgress } from '@mui/material';
 
 const MyComment = (props: { text: string }) => {

@@ -1,10 +1,13 @@
-import { PanelKind, setPanel } from "../Panels";
+import { PanelKind, setPanel } from '../Panels';
 
 export type ModalContainerProps = {
   top: string;
   width: string;
   height: string;
   children: React.ReactNode;
+  outsideStyle?: any;
+  dismissOnClickOutside?: boolean;
+  zIndex?: number;
 };
 
 export const ModalContainer = (props: ModalContainerProps) => {
@@ -18,9 +21,13 @@ export const ModalContainer = (props: ModalContainerProps) => {
                 left-0
                 w-screen
                 h-screen
-                z-[1000]
             "
-      onClick={() => setPanel('none')}
+      style={{ ...props.outsideStyle, zIndex: props.zIndex ?? 1000 }}
+      onClick={() => {
+        if (props.dismissOnClickOutside !== false) {
+          setPanel('none');
+        }
+      }}
     >
       <div
         className="absolute rounded-[15px] overflow-hidden z-[2000]"

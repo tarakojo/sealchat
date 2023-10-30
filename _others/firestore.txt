@@ -21,7 +21,7 @@ users (collections): {
 
         calendar : (collections) : {
             <date> : {
-                dateUnixTime : date 
+                date : string ... YYYY/MM/DD
                 content : string 
             }
         }   

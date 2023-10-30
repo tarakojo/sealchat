@@ -59,19 +59,26 @@ def get_chat_history(db, uid) :
         print(entry.to_dict())
     return [entry.to_dict() for entry in chat_history_data]
 
-def set_caendar(db, uid, entry):
+def get_calendar(db, uid, date):
     calendar_ref = get_calendar_ref(db, uid)
-    calendar_ref.add(entry)
+    calendar_data = calendar_ref.where(filter=FieldFilter("date", "==", date)).get()
+    return [entry.to_dict()  for entry in calendar_data]
 
-def get_calendar(db, uid, startUnixTime, endUnixTime):
+def get_calendars(db, uid, start, n):
+    print(f'start: {start}, n: {n}')
     calendar_ref = get_calendar_ref(db, uid)
-    calendar_data = calendar_ref.where(filter=FieldFilter("dateUnixTime", ">=", startUnixTime)).where(filter=FieldFilter("dateUnixTime", "<=", endUnixTime)).get()
+    calendar_data = calendar_ref.order_by("date", direction=firestore.Query.DESCENDING).offset(start).limit(n).get()
+    for entry in calendar_data :
+        print(entry.to_dict())
     return [entry.to_dict()  for entry in calendar_data]
 
 def get_recent_calendar(db, uid, n):
+    return get_calendars(db, uid, 0, n)
+
+def set_calendar(db, uid, entry):
     calendar_ref = get_calendar_ref(db, uid)
-    calendar_data = calendar_ref.order_by("dateUnixTime", direction=firestore.Query.DESCENDING).limit(n).get()
-    
-    res = [entry.to_dict()  for entry in calendar_data]
-    res.reverse()    
-    return res 
+    docs = calendar_ref.where(filter=FieldFilter("date", "==", entry["date"])).stream()
+    for doc in docs :
+        doc.reference.delete()
+    calendar_ref.add(entry)
+

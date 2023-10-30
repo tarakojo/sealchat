@@ -1,13 +1,22 @@
-import { auth, googleAuthProvider } from '../../../../../firebase/firebase';
-import { setPanel } from '../../Panels';
-import ModalContainer from '../ModalContainer';
+import { auth, googleAuthProvider } from '../../../../firebase/firebase';
+import { setPanel } from '../Panels';
+import ModalContainer from './ModalContainer';
 import StyledFirebaseAuth from './StyledFirebaseAuth';
 
-export const AccountModal = () => {
+export const Wellcome = () => {
   return (
-    <ModalContainer top="30%" width="400px" height="200px">
+    <ModalContainer
+      top="30%"
+      width="400px"
+      height="200px"
+      outsideStyle={{
+        backgroundColor: 'rgba(0,0,0,0.5)',
+      }}
+      dismissOnClickOutside={false}
+      zIndex={2000}
+    >
       <div className="flex flex-row justify-center">
-        <p className="text-2xl">別のアカウントでログインする</p>
+        <p className="text-2xl">ログイン</p>
       </div>
       <div className="flex flex-col justify-center items-center">
         <StyledFirebaseAuth
@@ -28,4 +37,4 @@ export const AccountModal = () => {
   );
 };
 
-export default AccountModal;
+export default Wellcome;

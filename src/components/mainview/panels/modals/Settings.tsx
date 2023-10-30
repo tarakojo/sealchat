@@ -1,12 +1,12 @@
-import ModalContainer from '../ModalContainer';
+import ModalContainer from './ModalContainer';
 import { TextField, Button, CircularProgress } from '@mui/material';
-import {} from '../../../../../main';
+import {} from '../../../../main';
 import { httpsCallable } from 'firebase/functions';
-import { functions } from '../../../../../firebase/firebase';
+import { functions } from '../../../../firebase/firebase';
 import { useRef, useState, useEffect } from 'react';
 import CustomTextField, {
   CustomTextFieldCurrentState,
-} from '../../../../../utils/CustomTextField';
+} from '../../../../utils/CustomTextField';
 
 const maxLength = 256;
 
@@ -104,11 +104,11 @@ export const Settings = () => {
               }));
             }}
           />
-          <br/>
+          <br />
           <CustomTextField
             className=""
             label={'ごまに知っておいてほしいこと'}
-            fullWidth={true} 
+            fullWidth={true}
             multiline={true}
             maxLength={256}
             content={settingsState.profile}
