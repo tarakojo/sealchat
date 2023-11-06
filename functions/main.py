@@ -113,7 +113,7 @@ def chat_with_message(req: https_fn.Request):
 #    "currentUnixTime" : int?
 # }
 @https_fn.on_call(region=REGION)
-def comment(req: https_fn.Request):
+def comment_to_diary(req: https_fn.Request):
     db = firestore.client()
 
     return chat.comment(db, req.auth.uid, req.data["currentUnixTime"])

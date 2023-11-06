@@ -9,7 +9,7 @@ export type PanelKind =
   | 'chatHistory'
   | 'settings'
   | 'calendar'
-  | 'wellcome';
+  | 'welcome';
 
 export const setPanel = (panel: PanelKind) => {
   document.dispatchEvent(new CustomEvent('setPanel', { detail: panel }));
@@ -24,7 +24,7 @@ export const Panels = () => {
     };
     document.addEventListener('setPanel', setPanelListener);
 
-    if (auth.currentUser === null) setPanelKind('wellcome');
+    if (auth.currentUser === null) setPanelKind('welcome');
 
     return () => {
       document.removeEventListener('setPanel', setPanelListener);

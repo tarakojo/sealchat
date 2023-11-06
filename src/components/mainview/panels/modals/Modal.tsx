@@ -19,7 +19,7 @@ export const Modal = (props: {
       return <Calendar />;
     case 'chatHistory':
       return <ChatHistory />;
-    case 'wellcome':
+    case 'welcome':
       return <Wellcome />;
     default:
       return null;

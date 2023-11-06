@@ -137,7 +137,7 @@ export const MessageBoard = () => {
 
     const result = await httpsCallable<any, any>(
       functions,
-      'comment'
+      'comment_to_diary'
     )({ currentUnixTime: Date.now() });
     
     showHukidasi(result.data);
