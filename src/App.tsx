@@ -1,12 +1,8 @@
 import MainView from './components/mainview/MainView';
-import {
-  auth,
-  emailAuthProvider,
-  googleAuthProvider,
-} from './firebase/firebase';
 import { useRef, useEffect } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import "./firebase";
 
 /* MUIの設定 -------------- */
 export const theme = createTheme({

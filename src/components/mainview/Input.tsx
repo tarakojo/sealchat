@@ -1,6 +1,5 @@
 import { httpsCallable } from 'firebase/functions';
 import { useRef, useEffect, useState } from 'react';
-import { functions } from '../../firebase/firebase';
 import { showHukidasi } from './hukidasi/Hukidasi';
 import { CircularProgress } from '@mui/material';
 
@@ -32,11 +31,9 @@ const InputBox = () => {
       console.log(`send message: ${message}`);
 
       //入力を送信
-      const result = await httpsCallable<any, any>(
-        functions,
-        'chat_with_message'
-      )({ message: message, currentUnixTime: Date.now() });
-
+      const result = {
+        data: 'dummy response!',
+      };
       console.log(result.data);
 
       //返答を吹き出しで表示
@@ -68,7 +65,11 @@ const InputBox = () => {
           type="submit"
           className="rounded-lg bg-cyan-800 px-3 py-1 text-slate-200 overflow-hidden transform transition-transform hover:scale-[105%] active:scale-100"
         >
-          {submitting ? <CircularProgress color='secondary' size={24}/> : <SubmitIcon />}
+          {submitting ? (
+            <CircularProgress color="secondary" size={24} />
+          ) : (
+            <SubmitIcon />
+          )}
         </button>
       </div>
     </form>

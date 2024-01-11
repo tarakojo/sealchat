@@ -2,10 +2,7 @@ import SealView from './sealview/SealView';
 import Hukidasi from './hukidasi/Hukidasi';
 import Background, { getNewBackgroundSize } from './Background';
 import Input from './Input';
-import Clock from './Clock';
 import { useEffect, useRef, useState } from 'react';
-import Panels from './panels/Panels';
-import MessageBoard from './MessageBoard';
 
 export const MainView = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -53,10 +50,7 @@ export const MainView = () => {
         {background}
         {sealView}
         <Input />
-        <Clock />
         <Hukidasi />
-        <MessageBoard />
-        <Panels />
       </div>
     </>
   );
